@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "created_at": "2026-10-29T06:57:31.940102+00:00",
+  "files": {
+    "vector_store/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vector_store/chunk_ids.json": "7d444f7d84425405a5299432b4f4d6fbb8a9b048fe55bdd00fdcf69994a0ea0f",
+    "vector_store/index.faiss": "e3ca20bec54a866445788368e8cc449b855acccaff302788ce5bc30611297c18",
+    "vector_store/vectorizer.pkl": "3a8dc1d4688575f4d418cd584a8398db40cb82824aaca4b15bfc182ddeaa5d26",
+    "warehouse/abnormal_returns.parquet": "12bf766a94548cb9a00ab1bffe244cff103e4e1879583162537857bb6080c283",
+    "warehouse/companies.parquet": "c12d59bd0fcfe5be68602934ed74d2c5942cbca38c01dd0159e1c3c3b2136e8e",
+    "warehouse/correlations.parquet": "e8487d41cbf344d42227a0c6961026fcf94bda3046ff86e90266aa0a6353209b",
+    "warehouse/document_chunks.parquet": "05d680e8307598398920db312284a6460519c3188647091772a71e82cc662938",
+    "warehouse/documents.parquet": "f7e1e494aed7b7d2bbf9ec98d2c0206c7bdce44269fd1b1fe13f525b421504c0",
+    "warehouse/event_news.parquet": "97a71ceef4ec9fe26e8427d903ea2827c7c988e60b30100f04d6a38c0761a7dc",
+    "warehouse/event_returns.parquet": "6a8b16ef0ab6604e2d7991d61c546e3e546707ac567ce2573df60cab8e73a1db",
+    "warehouse/historical_events.parquet": "830f64503fde3a721c209cf0c9be0a02460a3e00b2625236a80c6ae5f23cd8cd",
+    "warehouse/load.sql": "2a658f19579e56f8950c27a1cf9dda1703ac2a285856eb81a72fc3730f8de0cc",
+    "warehouse/market_events.parquet": "f7d7799d7e569ea6e024a2b8a0d2dcc70731b850787029ed01d893ae43838544",
+    "warehouse/news.parquet": "cca68b56204b4f2d030fca90c8b90ceb7e6acbd1b6119fa7e8477c6778958079",
+    "warehouse/price_data.parquet": "9a9bcc34ed3bc7ab9c0edbb24ff85f0e5a19f2cf009086e2287bc79aab2845c1",
+    "warehouse/price_features.parquet": "a8b5f5d68de5255c4afcc2f226e3a738ec1221cd44bedac85973fbe1399ae116",
+    "warehouse/relationship_evidence.parquet": "2bf228b56a672f3e401f2cb1ae1066562fe2899400ae481d7b20c747a2fcaade",
+    "warehouse/relationships.parquet": "10363c130579a75bf98b2b8b155bed7a2fc89a656478ba938ef57400c77bf010",
+    "warehouse/rolling_correlations.parquet": "311ed77f9ef74d1b8631baae67c41b3b06464d681683ba576f1c27666312d707",
+    "warehouse/schema.sql": "194e9f9720f4d6e2fd5229e7e1d880e17e1a30057ffe4d696a8ff0153ad6318a"
+  }
+}

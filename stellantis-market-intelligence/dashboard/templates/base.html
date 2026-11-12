@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>{% block title %}Stellantis Market Intelligence{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='style.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('dashboard.executive_overview') }}"><span class="brand-mark">S</span><span>Market Intelligence</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="{{ url_for('dashboard.executive_overview') }}" {% if request.endpoint == 'dashboard.executive_overview' %}class="active" aria-current="page"{% endif %}>
+        Overview
+      </a>
+      <a href="{{ url_for('dashboard.event_explorer') }}" {% if request.endpoint == 'dashboard.event_explorer' %}class="active" aria-current="page"{% endif %}>
+        Events
+      </a>
+      <a href="{{ url_for('dashboard.ecosystem_graph') }}" {% if request.endpoint == 'dashboard.ecosystem_graph' %}class="active" aria-current="page"{% endif %}>
+        Ecosystem
+      </a>
+      <a href="{{ url_for('dashboard.historical_events') }}" {% if request.endpoint == 'dashboard.historical_events' %}class="active" aria-current="page"{% endif %}>
+        Historical
+      </a>
+      <a href="{{ url_for('dashboard.ai_investigation') }}" {% if request.endpoint == 'dashboard.ai_investigation' %}class="active" aria-current="page"{% endif %}>
+        AI Investigation
+      </a>
+      <a href="{{ url_for('dashboard.evidence') }}" {% if request.endpoint == 'dashboard.evidence' %}class="active" aria-current="page"{% endif %}>
+        Evidence
+      </a>
+      <a href="{{ url_for('dashboard.system_status') }}" {% if request.endpoint == 'dashboard.system_status' %}class="active" aria-current="page"{% endif %}>
+        Status
+      </a>
+      {% if auth_enabled and authenticated %}
+      <form method="post" action="{{ url_for('logout') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn">Sign Out</button>
+      </form>
+      {% endif %}
+    </nav>
+  </header>
+
+  <div class="ticker-strip">
+    <span class="market-data-label">LAST STORED CLOSE</span>
+    <span class="ticker-sym">STLA</span>
+    {% if ticker and ticker.price is not none %}
+      <span class="ticker-price">${{ "%.2f"|format(ticker.price) }}</span>
+      <span class="{{ 'pos' if ticker.change >= 0 else 'neg' }}">
+        {{ "+" if ticker.change >= 0 else "" }}{{ "%.2f"|format(ticker.change) }} ({{ "+" if ticker.change_pct >= 0 else "" }}{{ "%.2f"|format(ticker.change_pct) }}%)
+      </span>
+    {% else %}
+      <span class="muted">Data unavailable</span>
+    {% endif %}
+    <span class="ticker-date">{{ ticker.date if ticker else '' }} &middot; NYSE &middot; Yahoo Finance daily data</span>
+  </div>
+
+  <main class="content" id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+  
+  <footer class="footer">
+    <p>Market and corporate intelligence research only. Not an investment recommendation system.</p>
+    <p>Market values reflect the latest data stored in this application, not a real-time quote.</p>
+  </footer>
+</body>
+</html>

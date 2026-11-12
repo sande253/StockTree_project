@@ -1,0 +1,14 @@
+2026-10-13 12:10:25 - api.main - INFO - Logging configured - Level: INFO
+2026-10-13 12:10:27 - api.main - INFO - Stellantis Market Intelligence application initialized
+ * Serving Flask app 'api.main'
+ * Debug mode: off
+2026-10-13 12:10:43 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2026-10-13 12:10:43 - faiss.loader - INFO - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-13 12:10:43 - faiss.loader - INFO - Loading faiss.
+2026-10-13 12:10:43 - faiss.loader - INFO - Successfully loaded faiss.
+2026-10-13 12:10:48 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 12:24:53 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 12:25:13 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 12:26:10 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 12:26:24 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"

@@ -1,0 +1,1716 @@
+2026-10-05 11:09:18 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-05 11:09:21 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-05 11:09:21 - waitress - INFO - log_info:449 - Serving on http://0.0.0.0:8000
+2026-10-05 11:15:44 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-05 11:15:44 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-05 11:15:44 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-05 11:15:44 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-05 11:33:46 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-05 11:33:48 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-05 11:33:48 - waitress - INFO - log_info:449 - Serving on http://0.0.0.0:8000
+2026-10-05 11:33:48 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-05 11:33:48 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-05 11:33:48 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-05 11:33:48 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-05 11:55:50 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-05 11:55:51 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-05 11:55:51 - waitress - INFO - log_info:449 - Serving on http://0.0.0.0:8000
+2026-10-05 12:01:34 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-05 12:01:36 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-05 12:01:36 - waitress - INFO - log_info:449 - Serving on http://0.0.0.0:8000
+2026-10-05 12:39:54 - api.main - ERROR - handle_unexpected_error:153 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\dashboard\routes.py", line 34, in executive_overview
+    combined = build_all_combined_profiles(graph, event_id=latest_event["event_id"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 166, in build_all_combined_profiles
+    return [
+           ^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 167, in <listcomp>
+    build_combined_profile(graph, n["entity_id"], event_id=event_id, db_path=db_path)
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 144, in build_combined_profile
+    correlation = load_statistical_correlation(ticker, db_path=db_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 51, in load_statistical_correlation
+    row = conn.execute(
+          ^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: Could not convert string 'F' to DOUBLE when casting from source column ticker
+
+LINE 4:             WHERE ticker = ? AND reference_ticker = ?
+                          ^
+2026-10-05 12:40:15 - api.main - ERROR - handle_unexpected_error:153 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\dashboard\routes.py", line 34, in executive_overview
+    combined = build_all_combined_profiles(graph, event_id=latest_event["event_id"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 166, in build_all_combined_profiles
+    return [
+           ^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 167, in <listcomp>
+    build_combined_profile(graph, n["entity_id"], event_id=event_id, db_path=db_path)
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 144, in build_combined_profile
+    correlation = load_statistical_correlation(ticker, db_path=db_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 51, in load_statistical_correlation
+    row = conn.execute(
+          ^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: Could not convert string 'F' to DOUBLE when casting from source column ticker
+
+LINE 4:             WHERE ticker = ? AND reference_ticker = ?
+                          ^
+2026-10-05 12:41:39 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-05 12:41:40 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-05 12:41:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-05 12:41:42 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-05 12:41:42 - werkzeug - WARNING - _log:97 -  * Debugger is active!
+2026-10-05 12:41:50 - api.main - ERROR - handle_unexpected_error:153 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\dashboard\routes.py", line 34, in executive_overview
+    combined = build_all_combined_profiles(graph, event_id=latest_event["event_id"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 166, in build_all_combined_profiles
+    return [
+           ^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 167, in <listcomp>
+    build_combined_profile(graph, n["entity_id"], event_id=event_id, db_path=db_path)
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 144, in build_combined_profile
+    correlation = load_statistical_correlation(ticker, db_path=db_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 51, in load_statistical_correlation
+    row = conn.execute(
+          ^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: Could not convert string 'F' to DOUBLE when casting from source column ticker
+
+LINE 4:             WHERE ticker = ? AND reference_ticker = ?
+                          ^
+2026-10-05 12:42:44 - api.main - ERROR - handle_unexpected_error:153 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\dashboard\routes.py", line 34, in executive_overview
+    combined = build_all_combined_profiles(graph, event_id=latest_event["event_id"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 166, in build_all_combined_profiles
+    return [
+           ^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 167, in <listcomp>
+    build_combined_profile(graph, n["entity_id"], event_id=event_id, db_path=db_path)
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 144, in build_combined_profile
+    correlation = load_statistical_correlation(ticker, db_path=db_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 51, in load_statistical_correlation
+    row = conn.execute(
+          ^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: Could not convert string 'F' to DOUBLE when casting from source column ticker
+
+LINE 4:             WHERE ticker = ? AND reference_ticker = ?
+                          ^
+2026-10-05 12:43:17 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-05 12:43:19 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-05 12:43:19 - werkzeug - WARNING - _log:97 -  * Debugger is active!
+2026-10-06 12:06:25 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-06 12:06:27 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-06 12:06:28 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-06 12:06:31 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-06 12:06:31 - werkzeug - WARNING - _log:97 -  * Debugger is active!
+2026-10-06 12:18:22 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-06 12:18:22 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-06 12:18:22 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-06 12:18:22 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-07 15:21:54 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:21:55 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:22:06 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-07 15:22:06 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-07 15:22:06 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-07 15:22:06 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-07 15:22:32 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:22:34 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:22:54 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-07 15:22:54 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-07 15:22:54 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-07 15:22:54 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-07 15:23:16 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:17 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:17 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:17 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:17 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:17 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:18 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:18 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:18 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:18 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:18 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:18 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:19 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:19 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:19 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:19 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:20 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:20 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:28 - ai.rag - WARNING - answer_question:77 - Groq completion failed: simulated network failure
+2026-10-07 15:23:36 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:36 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:36 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:37 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:37 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:37 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:37 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:37 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:37 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:37 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:38 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:38 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:38 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:38 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:38 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:38 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:39 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:39 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:39 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:39 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:39 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:23:39 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:23:48 - ai.rag - WARNING - answer_question:77 - Groq completion failed: simulated network failure
+2026-10-07 15:25:25 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:25:27 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:25:27 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:25:29 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:25:29 - werkzeug - WARNING - _log:97 -  * Debugger is active!
+2026-10-07 15:25:57 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-07 15:25:57 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-07 15:25:57 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-07 15:25:57 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-07 15:29:03 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-10-07 15:29:03 - ai.agent - WARNING - synthesize_narrative:162 - Groq synthesis failed: Error code: 404 - {'error': {'message': 'The model `llama-3.1-8b-instant` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2026-10-07 15:32:12 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:14 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:14 - werkzeug - WARNING - _log:97 -  * Debugger is active!
+2026-10-07 15:32:16 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:17 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:17 - werkzeug - WARNING - _log:97 -  * Debugger is active!
+2026-10-07 15:32:28 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:28 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:29 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:29 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:29 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:29 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:29 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:29 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:29 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:29 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:30 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:30 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:30 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-10-07 15:32:30 - ai.agent - WARNING - synthesize_narrative:162 - Groq synthesis failed: Error code: 404 - {'error': {'message': 'The model `llama-3.1-8b-instant` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2026-10-07 15:32:30 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:30 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:31 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:31 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:31 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:31 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:31 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:31 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:31 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:32:31 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:32:48 - ai.rag - WARNING - answer_question:77 - Groq completion failed: simulated network failure
+2026-10-07 15:33:59 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:34:00 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:34:01 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:34:02 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:34:02 - werkzeug - WARNING - _log:97 -  * Debugger is active!
+2026-10-07 15:34:05 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-07 15:34:05 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-07 15:34:05 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-07 15:34:05 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-07 15:34:11 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-10-07 15:34:11 - ai.agent - WARNING - synthesize_narrative:162 - Groq synthesis failed: Error code: 404 - {'error': {'message': 'The model `llama-3.1-8b-instant` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2026-10-07 15:35:20 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-10-07 15:35:20 - ai.agent - WARNING - synthesize_narrative:162 - Groq synthesis failed: Error code: 404 - {'error': {'message': 'The model `llama-3.1-8b-instant` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2026-10-07 15:35:47 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-10-07 15:35:47 - ai.agent - WARNING - synthesize_narrative:162 - Groq synthesis failed: Error code: 404 - {'error': {'message': 'The model `llama-3.1-8b-instant` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2026-10-07 15:36:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:36:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-07 15:36:44 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:36:44 - werkzeug - WARNING - _log:97 -  * Debugger is active!
+2026-10-07 15:36:44 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-07 15:36:44 - werkzeug - WARNING - _log:97 -  * Debugger is active!
+2026-10-13 11:24:54 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-13 11:24:56 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-13 11:25:29 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-13 11:25:29 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-13 11:25:29 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-13 11:25:29 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-13 11:25:40 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-10-13 11:25:40 - ai.agent - WARNING - synthesize_narrative:162 - Groq synthesis failed: Error code: 404 - {'error': {'message': 'The model `llama-3.1-8b-instant` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2026-10-13 11:27:51 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-10-13 11:27:51 - ai.agent - WARNING - synthesize_narrative:162 - Groq synthesis failed: Error code: 404 - {'error': {'message': 'The model `llama-3.1-8b-instant` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2026-10-13 11:28:10 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-10-13 11:28:10 - ai.agent - WARNING - synthesize_narrative:162 - Groq synthesis failed: Error code: 404 - {'error': {'message': 'The model `llama-3.1-8b-instant` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2026-10-13 11:29:56 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-10-13 11:29:56 - ai.agent - WARNING - synthesize_narrative:162 - Groq synthesis failed: Error code: 404 - {'error': {'message': 'The model `llama-3.1-8b-instant` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2026-10-13 11:31:01 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-13 11:31:04 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-13 11:42:18 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-10-13 11:42:18 - ai.agent - WARNING - synthesize_narrative:162 - Groq synthesis failed: Error code: 404 - {'error': {'message': 'The model `llama-3.1-8b-instant` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2026-10-13 11:42:36 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-10-13 11:42:36 - ai.agent - WARNING - synthesize_narrative:162 - Groq synthesis failed: Error code: 404 - {'error': {'message': 'The model `llama-3.1-8b-instant` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2026-10-13 11:42:42 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-10-13 11:42:42 - ai.agent - WARNING - synthesize_narrative:162 - Groq synthesis failed: Error code: 404 - {'error': {'message': 'The model `llama-3.1-8b-instant` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2026-10-13 11:44:00 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-13 11:44:02 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-13 11:44:37 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-13 11:44:37 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-13 11:44:37 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-13 11:44:37 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-13 11:44:48 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 11:48:59 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 11:49:20 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 11:49:51 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 11:50:05 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 11:59:28 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-13 11:59:30 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-13 11:59:39 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-13 11:59:39 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-13 11:59:39 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-13 11:59:39 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-13 11:59:46 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 12:10:25 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-13 12:10:27 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-13 12:10:43 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-13 12:10:43 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-13 12:10:43 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-13 12:10:43 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-13 12:10:48 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 12:24:53 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 12:25:13 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 12:26:10 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-13 12:26:24 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 14:09:11 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:09:11 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:09:12 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:09:12 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:09:12 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:09:12 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:09:13 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:09:13 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:09:13 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:09:13 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:09:14 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:09:14 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:09:17 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 14:09:17 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:09:17 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:09:17 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:09:17 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:09:18 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:09:18 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:09:18 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:09:18 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:09:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:09:19 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:41:55 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:42:04 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:43:49 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:43:51 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:43:52 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:43:52 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:43:52 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:43:52 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:43:52 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 14:43:52 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 14:43:52 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 14:43:52 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 14:43:53 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:43:53 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:44:52 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:44:54 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:44:54 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 14:44:54 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 14:44:54 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 14:44:54 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 14:48:39 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:48:42 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:07 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:07 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:07 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:07 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:08 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:08 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:08 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:08 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:08 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:08 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:09 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:09 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:12 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 14:49:13 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:13 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:13 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:13 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:13 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:13 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:14 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:14 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:14 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:14 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:15 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:15 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:15 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:49:15 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:49:28 - ai.rag - WARNING - answer_question:77 - Groq completion failed: simulated network failure
+2026-10-23 14:50:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:50:40 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:51:51 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 14:51:51 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 14:51:51 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 14:51:51 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 14:51:57 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 14:53:14 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:53:16 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:53:17 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:53:17 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:53:17 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 14:53:17 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 14:53:17 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 14:53:17 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 14:53:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:53:38 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:54:00 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 14:54:00 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 14:54:00 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 14:54:00 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 14:55:46 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 14:55:54 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:55:54 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:55:54 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:55:54 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:55:55 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:55:55 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:55:55 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:55:55 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:55:56 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:55:56 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:55:56 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:55:56 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:55:59 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 14:56:00 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:56:00 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:56:00 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:56:00 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:56:00 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:56:00 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:56:01 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:56:01 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:56:01 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:56:01 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:56:02 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:56:02 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:56:02 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 14:56:02 - api.main - INFO - create_app:156 - Stellantis Market Intelligence application initialized
+2026-10-23 14:56:13 - ai.rag - WARNING - answer_question:77 - Groq completion failed: simulated network failure
+2026-10-23 15:02:03 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:02:09 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:04:04 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:05:25 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:11:09 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:11:17 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:11:33 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:11:33 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:11:34 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:11:34 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:11:34 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:11:34 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:11:59 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:12:01 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 15:12:01 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 15:12:01 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 15:12:01 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 15:12:03 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:12:18 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:14:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:14:41 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 15:14:41 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 15:14:41 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 15:14:41 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 15:14:42 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:15:32 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:15:32 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 15:15:32 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 15:15:32 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 15:15:32 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 15:15:33 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:15:44 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:16:00 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:16:01 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 15:16:01 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 15:16:01 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 15:16:01 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 15:16:04 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:16:15 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:18:52 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:18:52 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 15:18:52 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 15:18:52 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 15:18:53 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 15:18:56 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:19:10 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:19:38 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:19:40 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 15:19:40 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 15:19:40 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 15:19:40 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 15:19:43 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:19:59 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:20:21 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:21:07 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-23 15:30:05 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:30:05 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 15:30:05 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 15:30:05 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 15:30:05 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 15:30:07 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:30:07 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:30:07 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:30:49 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:30:49 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:31:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:31:42 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 15:31:42 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 15:31:42 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 15:31:42 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 15:31:44 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:31:44 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:31:44 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:33:32 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:33:32 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 15:33:32 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 15:33:32 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 15:33:32 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 15:33:33 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:33:34 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:33:34 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-23 15:53:51 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-23 15:53:51 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-23 15:53:51 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-23 15:53:51 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-23 15:53:51 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-23 15:53:52 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:12 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:13 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:13 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:13 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:13 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:13 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:14 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:14 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:14 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:14 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:15 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:15 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:15 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:15 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:18 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 11:45:18 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:18 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:19 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:19 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:19 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:20 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:20 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:20 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:20 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:20 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:20 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:21 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:21 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:21 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:21 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:22 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:22 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:45:22 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:45:22 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:22 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:22 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:23 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:23 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:25 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:25 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:26 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:26 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:28 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:28 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:29 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:29 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:31 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:31 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:36 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 11:50:37 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:37 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:37 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:37 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:38 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:38 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:38 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:38 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:39 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:39 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:39 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:39 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:40 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:42 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:44 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:44 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:45 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:45 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:50:46 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:50:46 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:51:10 - ingestion.pipeline - ERROR - run_pipeline:150 - Pipeline failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 76, in run_pipeline
+    conn = get_connection(warehouse)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 43, in fail_connection
+    raise OSError("database is locked")
+OSError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 79, in run_pipeline
+    raise RuntimeError(
+RuntimeError: Cannot open the warehouse for refresh. Stop the application first if it holds a DuckDB lock, then retry.
+2026-10-29 11:51:10 - ingestion.pipeline - INFO - stage:59 - Starting companies
+2026-10-29 11:51:10 - ingestion.pipeline - INFO - stage:59 - Starting relationships
+2026-10-29 11:51:10 - ingestion.pipeline - INFO - stage:59 - Starting prices:STLA
+2026-10-29 11:51:10 - ingestion.pipeline - INFO - stage:59 - Starting news
+2026-10-29 11:51:10 - ingestion.pipeline - INFO - stage:59 - Starting features:STLA
+2026-10-29 11:51:10 - ingestion.pipeline - INFO - stage:59 - Starting correlations
+2026-10-29 11:51:10 - ingestion.pipeline - INFO - stage:59 - Starting events
+2026-10-29 11:51:10 - ingestion.pipeline - INFO - stage:59 - Starting event-context
+2026-10-29 11:51:10 - ingestion.pipeline - INFO - stage:59 - Starting fingerprints
+2026-10-29 11:51:10 - ingestion.pipeline - INFO - stage:59 - Starting search-index
+2026-10-29 11:51:10 - ingestion.pipeline - INFO - stage:59 - Starting quality
+2026-10-29 11:51:11 - ingestion.pipeline - INFO - stage:59 - Starting companies
+2026-10-29 11:51:11 - ingestion.pipeline - INFO - stage:59 - Starting relationships
+2026-10-29 11:51:11 - ingestion.pipeline - INFO - stage:59 - Starting prices:STLA
+2026-10-29 11:51:11 - ingestion.pipeline - ERROR - stage:66 - Stage prices:STLA failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 61, in stage
+    result = action()
+             ^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 110, in <lambda>
+    stage(f"prices:{ticker}", lambda ticker=ticker, start=start: ingest_price_history(
+                                                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 63, in action
+    raise RuntimeError("provider unavailable")
+RuntimeError: provider unavailable
+2026-10-29 11:51:11 - ingestion.pipeline - INFO - stage:59 - Starting news
+2026-10-29 11:51:11 - ingestion.pipeline - INFO - stage:59 - Starting features:STLA
+2026-10-29 11:51:11 - ingestion.pipeline - INFO - stage:59 - Starting correlations
+2026-10-29 11:51:11 - ingestion.pipeline - INFO - stage:59 - Starting events
+2026-10-29 11:51:11 - ingestion.pipeline - INFO - stage:59 - Starting event-context
+2026-10-29 11:51:11 - ingestion.pipeline - INFO - stage:59 - Starting fingerprints
+2026-10-29 11:51:11 - ingestion.pipeline - INFO - stage:59 - Starting search-index
+2026-10-29 11:51:11 - ingestion.pipeline - INFO - stage:59 - Starting quality
+2026-10-29 11:51:11 - scripts.ingest_market_data - INFO - main:116 - Single ticker mode: STLA
+2026-10-29 11:51:11 - ai.rag - WARNING - answer_question:83 - Groq completion failed: simulated network failure
+2026-10-29 11:51:16 - scripts.build_vector_index - INFO - build_index:18 - Indexed 19 documents in 23 chunks
+2026-10-29 11:51:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:51:19 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 11:51:19 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 11:51:19 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 11:51:19 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 11:51:21 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:51:33 - api.main - ERROR - handle_unexpected_error:154 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\internals\blocks.py", line 1907, in fillna
+    new_values = self.values.fillna(value=value, limit=limit, copy=copy)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\arrays\masked.py", line 326, in fillna
+    new_values[mask] = value
+    ~~~~~~~~~~^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\arrays\masked.py", line 377, in __setitem__
+    value = self._validate_setitem_value(value)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\arrays\masked.py", line 363, in _validate_setitem_value
+    raise TypeError(f"Invalid value '{value!s}' for dtype '{self.dtype}'")
+TypeError: Invalid value '1.736842105263158' for dtype 'Int32'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\api\routes\reports.py", line 18, in get_event_report
+    report = generate_event_report(event_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\reports\generator.py", line 36, in generate_event_report
+    similar_events = find_similar_events(event_id, top_n=3)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\events\similarity.py", line 92, in find_similar_events
+    matrix = build_feature_matrix(events)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\events\similarity.py", line 56, in build_feature_matrix
+    numeric = numeric.fillna(numeric.mean()).fillna(0.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\generic.py", line 7103, in fillna
+    res_k = result[k].fillna(v, limit=limit)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\generic.py", line 7074, in fillna
+    new_data = self._mgr.fillna(value=value, limit=limit, inplace=inplace)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\internals\managers.py", line 461, in fillna
+    return self.apply(
+           ^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\internals\managers.py", line 445, in apply
+    applied = getattr(b, f)(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\internals\blocks.py", line 1911, in fillna
+    new_values = self.values.fillna(value=value, limit=limit)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\arrays\masked.py", line 326, in fillna
+    new_values[mask] = value
+    ~~~~~~~~~~^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\arrays\masked.py", line 377, in __setitem__
+    value = self._validate_setitem_value(value)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\arrays\masked.py", line 363, in _validate_setitem_value
+    raise TypeError(f"Invalid value '{value!s}' for dtype '{self.dtype}'")
+TypeError: Invalid value '1.736842105263158' for dtype 'Int32'
+2026-10-29 11:52:17 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:18 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 11:52:18 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 11:52:18 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 11:52:18 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 11:52:19 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:21 - api.main - ERROR - handle_unexpected_error:154 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\api\routes\reports.py", line 18, in get_event_report
+    report = generate_event_report(event_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\reports\generator.py", line 85, in generate_event_report
+    "historical_precedent": [
+                            ^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\reports\generator.py", line 87, in <listcomp>
+    "event_date": e["event_date"],
+                  ~^^^^^^^^^^^^^^
+KeyError: 'event_date'
+2026-10-29 11:52:21 - api.main - ERROR - handle_unexpected_error:154 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\api\routes\reports.py", line 18, in get_event_report
+    report = generate_event_report(event_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\reports\generator.py", line 85, in generate_event_report
+    "historical_precedent": [
+                            ^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\reports\generator.py", line 87, in <listcomp>
+    "event_date": e["event_date"],
+                  ~^^^^^^^^^^^^^^
+KeyError: 'event_date'
+2026-10-29 11:52:33 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:34 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:34 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:34 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:34 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:34 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:34 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:34 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:35 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:35 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:36 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:36 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:39 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 11:52:39 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:39 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:40 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:40 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:40 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:40 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:41 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:41 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:42 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:42 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:42 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:52:43 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:52:56 - ingestion.pipeline - ERROR - run_pipeline:150 - Pipeline failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 76, in run_pipeline
+    conn = get_connection(warehouse)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 43, in fail_connection
+    raise OSError("database is locked")
+OSError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 79, in run_pipeline
+    raise RuntimeError(
+RuntimeError: Cannot open the warehouse for refresh. Stop the application first if it holds a DuckDB lock, then retry.
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting companies
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting relationships
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting prices:STLA
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting news
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting features:STLA
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting correlations
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting events
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting event-context
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting fingerprints
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting search-index
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting quality
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting companies
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting relationships
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting prices:STLA
+2026-10-29 11:52:56 - ingestion.pipeline - ERROR - stage:66 - Stage prices:STLA failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 61, in stage
+    result = action()
+             ^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 110, in <lambda>
+    stage(f"prices:{ticker}", lambda ticker=ticker, start=start: ingest_price_history(
+                                                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 63, in action
+    raise RuntimeError("provider unavailable")
+RuntimeError: provider unavailable
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting news
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting features:STLA
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting correlations
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting events
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting event-context
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting fingerprints
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting search-index
+2026-10-29 11:52:56 - ingestion.pipeline - INFO - stage:59 - Starting quality
+2026-10-29 11:52:56 - scripts.ingest_market_data - INFO - main:116 - Single ticker mode: STLA
+2026-10-29 11:52:56 - ai.rag - WARNING - answer_question:83 - Groq completion failed: simulated network failure
+2026-10-29 11:53:00 - scripts.build_vector_index - INFO - build_index:18 - Indexed 19 documents in 23 chunks
+2026-10-29 11:53:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:40 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 11:53:40 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 11:53:40 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 11:53:40 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 11:53:41 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:41 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:41 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:42 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:42 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:43 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:43 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:43 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:47 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 11:53:47 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:47 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:47 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:47 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:48 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:48 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:48 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:48 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:48 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:48 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:49 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:49 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:49 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:49 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:49 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:49 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:50 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:50 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:50 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:50 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:53:50 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:53:50 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:54:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:54:20 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 11:54:20 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 11:54:20 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 11:54:20 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 11:54:22 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:54:47 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:54:48 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 11:54:48 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 11:54:48 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 11:54:48 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 11:54:49 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:54:49 - waitress - INFO - log_info:449 - Serving on http://127.0.0.1:8000
+2026-10-29 11:56:15 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 11:56:33 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 11:57:39 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:39 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:39 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:39 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:40 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:41 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:42 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:43 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:43 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:44 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:44 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:49 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 11:57:49 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:49 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:49 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:49 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:49 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:49 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:50 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:50 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:50 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:50 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:51 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:51 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:51 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:51 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:51 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:51 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:52 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:52 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:52 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:52 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:57:53 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 11:57:53 - api.main - INFO - create_app:157 - Stellantis Market Intelligence application initialized
+2026-10-29 11:58:09 - ingestion.pipeline - ERROR - run_pipeline:150 - Pipeline failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 76, in run_pipeline
+    conn = get_connection(warehouse)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 43, in fail_connection
+    raise OSError("database is locked")
+OSError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 79, in run_pipeline
+    raise RuntimeError(
+RuntimeError: Cannot open the warehouse for refresh. Stop the application first if it holds a DuckDB lock, then retry.
+2026-10-29 11:58:09 - ingestion.pipeline - INFO - stage:59 - Starting companies
+2026-10-29 11:58:09 - ingestion.pipeline - INFO - stage:59 - Starting relationships
+2026-10-29 11:58:09 - ingestion.pipeline - INFO - stage:59 - Starting prices:STLA
+2026-10-29 11:58:09 - ingestion.pipeline - INFO - stage:59 - Starting news
+2026-10-29 11:58:09 - ingestion.pipeline - INFO - stage:59 - Starting features:STLA
+2026-10-29 11:58:09 - ingestion.pipeline - INFO - stage:59 - Starting correlations
+2026-10-29 11:58:09 - ingestion.pipeline - INFO - stage:59 - Starting events
+2026-10-29 11:58:09 - ingestion.pipeline - INFO - stage:59 - Starting event-context
+2026-10-29 11:58:09 - ingestion.pipeline - INFO - stage:59 - Starting fingerprints
+2026-10-29 11:58:09 - ingestion.pipeline - INFO - stage:59 - Starting search-index
+2026-10-29 11:58:09 - ingestion.pipeline - INFO - stage:59 - Starting quality
+2026-10-29 11:58:10 - ingestion.pipeline - INFO - stage:59 - Starting companies
+2026-10-29 11:58:10 - ingestion.pipeline - INFO - stage:59 - Starting relationships
+2026-10-29 11:58:10 - ingestion.pipeline - INFO - stage:59 - Starting prices:STLA
+2026-10-29 11:58:10 - ingestion.pipeline - ERROR - stage:66 - Stage prices:STLA failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 61, in stage
+    result = action()
+             ^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 110, in <lambda>
+    stage(f"prices:{ticker}", lambda ticker=ticker, start=start: ingest_price_history(
+                                                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 63, in action
+    raise RuntimeError("provider unavailable")
+RuntimeError: provider unavailable
+2026-10-29 11:58:10 - ingestion.pipeline - INFO - stage:59 - Starting news
+2026-10-29 11:58:10 - ingestion.pipeline - INFO - stage:59 - Starting features:STLA
+2026-10-29 11:58:10 - ingestion.pipeline - INFO - stage:59 - Starting correlations
+2026-10-29 11:58:10 - ingestion.pipeline - INFO - stage:59 - Starting events
+2026-10-29 11:58:10 - ingestion.pipeline - INFO - stage:59 - Starting event-context
+2026-10-29 11:58:10 - ingestion.pipeline - INFO - stage:59 - Starting fingerprints
+2026-10-29 11:58:10 - ingestion.pipeline - INFO - stage:59 - Starting search-index
+2026-10-29 11:58:10 - ingestion.pipeline - INFO - stage:59 - Starting quality
+2026-10-29 11:58:10 - scripts.ingest_market_data - INFO - main:116 - Single ticker mode: STLA
+2026-10-29 11:58:10 - ai.rag - WARNING - answer_question:83 - Groq completion failed: simulated network failure
+2026-10-29 11:58:26 - scripts.build_vector_index - INFO - build_index:18 - Indexed 19 documents in 23 chunks
+2026-10-29 12:05:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:41 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 12:05:41 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 12:05:41 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 12:05:41 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 12:05:49 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:49 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:49 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:05:50 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:05:50 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:50 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:50 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:50 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:50 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:05:50 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:05:50 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:05:50 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:05:50 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:05:50 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:05:51 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:51 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:51 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:51 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:52 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:52 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:53 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:53 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:53 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:53 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:54 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:54 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:54 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:54 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:55 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:55 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:58 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 12:05:58 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:58 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:59 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:59 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:05:59 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:05:59 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:00 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:00 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:00 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:00 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:00 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:00 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:01 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:01 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:01 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:01 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:02 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:02 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:02 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:02 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:03 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:03 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:27 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:28 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 12:06:28 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 12:06:28 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 12:06:28 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 12:06:30 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:30 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:30 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:06:31 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:06:31 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:31 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:31 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:31 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:33 - flask-limiter - INFO - __evaluate_limits:1082 - ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: login
+2026-10-29 12:06:33 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:33 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:33 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:33 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:34 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:34 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:35 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:35 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:36 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:36 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:36 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:36 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:37 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:37 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:40 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 12:06:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:40 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:40 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:41 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:41 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:42 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:42 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:43 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:43 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:44 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:44 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:44 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:44 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:06:45 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:06:45 - api.main - INFO - create_app:162 - Stellantis Market Intelligence application initialized
+2026-10-29 12:07:50 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:07:51 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:07:51 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:07:51 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:07:52 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:07:52 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:07:52 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:07:52 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:07:52 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:07:54 - flask-limiter - INFO - __evaluate_limits:1082 - ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: login
+2026-10-29 12:14:30 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:31 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 12:14:31 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 12:14:31 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 12:14:31 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 12:14:33 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:33 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:33 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:34 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:34 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:35 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:35 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:36 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:36 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:36 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:36 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:37 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:37 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:40 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 12:14:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:40 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:41 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:41 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:41 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:42 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:42 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:42 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:43 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:43 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:44 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:44 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:14:44 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:14:44 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:15:27 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:15:28 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:15:28 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:15:28 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:15:29 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:15:29 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:15:29 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:15:29 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:15:29 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:15:31 - flask-limiter - INFO - __evaluate_limits:1082 - ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: login
+2026-10-29 12:16:51 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:52 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:16:52 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:52 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:16:52 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:52 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:16:53 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:53 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:16:54 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:54 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:16:54 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:54 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:16:55 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:55 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:16:55 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:55 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:16:58 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 12:16:58 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:58 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:16:58 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:58 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:16:59 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:59 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:16:59 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:59 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:16:59 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:16:59 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:17:00 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:17:00 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:17:00 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:17:00 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:17:00 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:17:00 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:17:01 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:17:01 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:17:01 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:17:01 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:17:02 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:17:02 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:15 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:15 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 12:18:15 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 12:18:15 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 12:18:15 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 12:18:17 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:18 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:18 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:18 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:18 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:19 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:20 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:20 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:20 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:20 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:21 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:21 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:21 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:21 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:22 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:22 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:25 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 12:18:26 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:26 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:26 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:26 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:26 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:26 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:27 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:27 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:27 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:27 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:28 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:28 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:28 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:28 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:29 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:29 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:29 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:29 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:30 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:30 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:18:30 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:18:30 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:30 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:31 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:31 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:31 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:32 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:32 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:33 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:33 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:34 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:34 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:34 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:34 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:35 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:35 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:36 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:36 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:39 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 12:19:39 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:39 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:40 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:40 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:40 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:41 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:41 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:41 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:42 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:42 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:43 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:44 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:44 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:44 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:44 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:19:45 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:19:45 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:23:50 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:23:50 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 12:23:50 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 12:23:50 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 12:23:52 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 12:24:17 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:24:17 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:24:17 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:24:19 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:24:20 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:24:20 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:24:21 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:24:21 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:24:23 - flask-limiter - INFO - __evaluate_limits:1082 - ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: login
+2026-10-29 12:24:24 - api.maintenance - ERROR - send_failure_alert:37 - Maintenance alert: {'job_id': '927d1bcaadd14035a59e2e6831ecc0e6', 'kind': 'refresh', 'status': 'degraded', 'timestamp': '2026-10-29T06:54:24.951794+00:00'}
+2026-10-29 12:25:34 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:34 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:35 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:35 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:35 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:35 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:36 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:36 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:37 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:37 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:37 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:37 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:38 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:38 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:38 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:38 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:42 - httpx - INFO - _send_single_request:1025 - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-29 12:25:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:42 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:43 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:43 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:43 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:44 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:44 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:44 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:44 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:45 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:45 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:45 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:45 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:46 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:46 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:46 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:46 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:47 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:47 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:25:47 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:25:47 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:26:16 - api.maintenance - ERROR - send_failure_alert:37 - Maintenance alert: {'job_id': 'ef6a8d14cd214ff09db8e3f3656cce24', 'kind': 'refresh', 'status': 'degraded', 'timestamp': '2026-10-29T06:56:16.156365+00:00'}
+2026-10-29 12:26:16 - ingestion.pipeline - ERROR - run_pipeline:163 - Pipeline failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 78, in run_pipeline
+    conn = get_connection(warehouse)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 46, in fail_connection
+    raise OSError("database is locked")
+OSError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 81, in run_pipeline
+    raise RuntimeError(
+RuntimeError: Cannot open the warehouse for refresh. Stop the application first if it holds a DuckDB lock, then retry.
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting companies
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting relationships
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting prices:STLA
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting news
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting features:STLA
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting correlations
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting events
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting event-context
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting fingerprints
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting search-index
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting quality
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting companies
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting relationships
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting prices:STLA
+2026-10-29 12:26:16 - ingestion.pipeline - ERROR - stage:68 - Stage prices:STLA failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 63, in stage
+    result = action()
+             ^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 123, in <lambda>
+    stage(f"prices:{ticker}", lambda ticker=ticker, start=start: ingest_price_history(
+                                                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 66, in action
+    raise RuntimeError("provider unavailable")
+RuntimeError: provider unavailable
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting news
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting features:STLA
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting correlations
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting events
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting event-context
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting fingerprints
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting search-index
+2026-10-29 12:26:16 - ingestion.pipeline - INFO - stage:61 - Starting quality
+2026-10-29 12:26:16 - scripts.ingest_market_data - INFO - main:116 - Single ticker mode: STLA
+2026-10-29 12:26:17 - ai.rag - WARNING - answer_question:84 - Groq completion failed: simulated network failure
+2026-10-29 12:26:18 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:26:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:26:19 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:26:19 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:26:19 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:26:19 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:26:19 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:26:20 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:26:20 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:26:21 - flask-limiter - INFO - __evaluate_limits:1082 - ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: login
+2026-10-29 12:26:26 - scripts.build_vector_index - INFO - build_index:18 - Indexed 19 documents in 23 chunks
+2026-10-29 12:27:03 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:27:04 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 12:27:04 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 12:27:04 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 12:27:04 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 12:27:07 - apscheduler.scheduler - INFO - add_job:507 - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-29 12:27:07 - apscheduler.scheduler - INFO - _real_add_job:1092 - Added job "configure_maintenance.<locals>.scheduled_refresh" to job store "default"
+2026-10-29 12:27:07 - apscheduler.scheduler - INFO - start:214 - Scheduler started
+2026-10-29 12:27:07 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:27:09 - waitress - INFO - log_info:449 - Serving on http://127.0.0.1:8000
+2026-10-29 12:27:31 - ingestion.pipeline - INFO - stage:61 - Starting backup
+2026-10-29 12:27:32 - ingestion.pipeline - INFO - stage:61 - Starting companies
+2026-10-29 12:27:32 - ingestion.pipeline - INFO - stage:61 - Starting relationships
+2026-10-29 12:27:32 - ingestion.pipeline - INFO - stage:61 - Starting prices:AMZN
+2026-10-29 12:27:35 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 251 rows for AMZN (2025-10-29..2026-10-29, interval=1d)
+2026-10-29 12:27:35 - ingestion.pipeline - INFO - stage:61 - Starting prices:STLA
+2026-10-29 12:27:35 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for STLA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:35 - ingestion.pipeline - INFO - stage:61 - Starting prices:TM
+2026-10-29 12:27:35 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for TM (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:35 - ingestion.pipeline - INFO - stage:61 - Starting prices:VWAGY
+2026-10-29 12:27:35 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for VWAGY (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:35 - ingestion.pipeline - INFO - stage:61 - Starting prices:F
+2026-10-29 12:27:36 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for F (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:36 - ingestion.pipeline - INFO - stage:61 - Starting prices:GM
+2026-10-29 12:27:36 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for GM (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:36 - ingestion.pipeline - INFO - stage:61 - Starting prices:TSLA
+2026-10-29 12:27:36 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for TSLA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:36 - ingestion.pipeline - INFO - stage:61 - Starting prices:BMW.DE
+2026-10-29 12:27:37 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for BMW.DE (2026-10-20..2026-10-29, interval=1d)
+2026-10-29 12:27:37 - ingestion.pipeline - INFO - stage:61 - Starting prices:MBG.DE
+2026-10-29 12:27:37 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for MBG.DE (2026-10-20..2026-10-29, interval=1d)
+2026-10-29 12:27:37 - ingestion.pipeline - INFO - stage:61 - Starting prices:RNO.PA
+2026-10-29 12:27:38 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for RNO.PA (2026-10-20..2026-10-29, interval=1d)
+2026-10-29 12:27:38 - ingestion.pipeline - INFO - stage:61 - Starting prices:000270.KS
+2026-10-29 12:27:38 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for 000270.KS (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:38 - ingestion.pipeline - INFO - stage:61 - Starting prices:AA
+2026-10-29 12:27:38 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for AA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:38 - ingestion.pipeline - INFO - stage:61 - Starting prices:ALB
+2026-10-29 12:27:39 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for ALB (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:39 - ingestion.pipeline - INFO - stage:61 - Starting prices:ALV
+2026-10-29 12:27:39 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for ALV (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:39 - ingestion.pipeline - INFO - stage:61 - Starting prices:APTV
+2026-10-29 12:27:40 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for APTV (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:40 - ingestion.pipeline - INFO - stage:61 - Starting prices:BWA
+2026-10-29 12:27:40 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for BWA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:40 - ingestion.pipeline - INFO - stage:61 - Starting prices:HMC
+2026-10-29 12:27:41 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for HMC (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:41 - ingestion.pipeline - INFO - stage:61 - Starting prices:INTC
+2026-10-29 12:27:41 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for INTC (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:42 - ingestion.pipeline - INFO - stage:61 - Starting prices:LEA
+2026-10-29 12:27:42 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for LEA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:42 - ingestion.pipeline - INFO - stage:61 - Starting prices:MBLY
+2026-10-29 12:27:43 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for MBLY (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:43 - ingestion.pipeline - INFO - stage:61 - Starting prices:MGA
+2026-10-29 12:27:43 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for MGA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:27:43 - ingestion.pipeline - ERROR - run_pipeline:163 - Pipeline failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 123, in run_pipeline
+    stage(f"prices:{ticker}", lambda ticker=ticker, start=start: ingest_price_history(
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 60, in stage
+    _write_report(report, report_path)
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 24, in _write_report
+    temporary.replace(path)
+  File "C:\Users\T0412ZL\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\pathlib.py", line 1188, in replace
+    os.replace(self, target)
+PermissionError: [WinError 5] Access is denied: 'data\\reports\\.pipeline-latest.json.5fe24262715147258466b0dab8c9df19.tmp' -> 'data\\reports\\pipeline-latest.json'
+2026-10-29 12:27:43 - api.maintenance - ERROR - send_failure_alert:37 - Maintenance alert: {'job_id': 'a61673ccb9674ce69780bc5a81f298ba', 'kind': 'refresh', 'status': 'failed', 'timestamp': '2026-10-29T06:57:43.874393+00:00'}
+2026-10-29 12:30:14 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:30:16 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 12:30:16 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 12:30:16 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 12:30:16 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 12:30:20 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:30:20 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:30:20 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:30:20 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:30:20 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:30:20 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:30:21 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:30:21 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:30:22 - flask-limiter - INFO - __evaluate_limits:1082 - ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: login
+2026-10-29 12:30:22 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:30:22 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:30:22 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:30:23 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:30:23 - flask_wtf.csrf - INFO - protect:288 - The CSRF session token is missing.
+2026-10-29 12:30:42 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:30:43 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 12:30:43 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 12:30:43 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 12:30:43 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 12:30:46 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:30:46 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:30:46 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:30:46 - flask_wtf.csrf - INFO - protect:288 - The CSRF token is missing.
+2026-10-29 12:30:47 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:30:47 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:30:47 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:30:47 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:30:49 - flask-limiter - INFO - __evaluate_limits:1082 - ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: login
+2026-10-29 12:30:49 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:30:49 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:30:49 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:30:49 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:31:14 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 12:31:15 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 12:31:15 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 12:31:15 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 12:31:15 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 12:31:17 - apscheduler.scheduler - INFO - add_job:507 - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-29 12:31:17 - apscheduler.scheduler - INFO - _real_add_job:1092 - Added job "configure_maintenance.<locals>.scheduled_refresh" to job store "default"
+2026-10-29 12:31:17 - apscheduler.scheduler - INFO - start:214 - Scheduler started
+2026-10-29 12:31:17 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 12:31:17 - waitress - INFO - log_info:449 - Serving on http://127.0.0.1:8000
+2026-10-29 12:32:27 - ingestion.pipeline - INFO - stage:60 - Starting backup
+2026-10-29 12:32:27 - ingestion.pipeline - INFO - stage:60 - Starting companies
+2026-10-29 12:32:27 - ingestion.pipeline - INFO - stage:60 - Starting relationships
+2026-10-29 12:32:28 - ingestion.pipeline - INFO - stage:60 - Starting prices:AMZN
+2026-10-29 12:32:29 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for AMZN (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:29 - ingestion.pipeline - INFO - stage:60 - Starting prices:STLA
+2026-10-29 12:32:30 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for STLA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:30 - ingestion.pipeline - INFO - stage:60 - Starting prices:TM
+2026-10-29 12:32:30 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for TM (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:30 - ingestion.pipeline - INFO - stage:60 - Starting prices:VWAGY
+2026-10-29 12:32:30 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for VWAGY (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:30 - ingestion.pipeline - INFO - stage:60 - Starting prices:F
+2026-10-29 12:32:31 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for F (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:31 - ingestion.pipeline - INFO - stage:60 - Starting prices:GM
+2026-10-29 12:32:31 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for GM (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:31 - ingestion.pipeline - INFO - stage:60 - Starting prices:TSLA
+2026-10-29 12:32:31 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for TSLA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:31 - ingestion.pipeline - INFO - stage:60 - Starting prices:BMW.DE
+2026-10-29 12:32:32 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for BMW.DE (2026-10-20..2026-10-29, interval=1d)
+2026-10-29 12:32:32 - ingestion.pipeline - INFO - stage:60 - Starting prices:MBG.DE
+2026-10-29 12:32:32 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for MBG.DE (2026-10-20..2026-10-29, interval=1d)
+2026-10-29 12:32:32 - ingestion.pipeline - INFO - stage:60 - Starting prices:RNO.PA
+2026-10-29 12:32:33 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for RNO.PA (2026-10-20..2026-10-29, interval=1d)
+2026-10-29 12:32:33 - ingestion.pipeline - INFO - stage:60 - Starting prices:000270.KS
+2026-10-29 12:32:33 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for 000270.KS (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:33 - ingestion.pipeline - INFO - stage:60 - Starting prices:AA
+2026-10-29 12:32:34 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for AA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:34 - ingestion.pipeline - INFO - stage:60 - Starting prices:ALB
+2026-10-29 12:32:34 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for ALB (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:34 - ingestion.pipeline - INFO - stage:60 - Starting prices:ALV
+2026-10-29 12:32:35 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for ALV (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:35 - ingestion.pipeline - INFO - stage:60 - Starting prices:APTV
+2026-10-29 12:32:35 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for APTV (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:35 - ingestion.pipeline - INFO - stage:60 - Starting prices:BWA
+2026-10-29 12:32:35 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for BWA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:35 - ingestion.pipeline - INFO - stage:60 - Starting prices:HMC
+2026-10-29 12:32:36 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for HMC (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:36 - ingestion.pipeline - INFO - stage:60 - Starting prices:INTC
+2026-10-29 12:32:36 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for INTC (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:36 - ingestion.pipeline - INFO - stage:60 - Starting prices:LEA
+2026-10-29 12:32:37 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for LEA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:37 - ingestion.pipeline - INFO - stage:60 - Starting prices:MBLY
+2026-10-29 12:32:37 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for MBLY (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:37 - ingestion.pipeline - INFO - stage:60 - Starting prices:MGA
+2026-10-29 12:32:38 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for MGA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:38 - ingestion.pipeline - INFO - stage:60 - Starting prices:NUE
+2026-10-29 12:32:38 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for NUE (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:38 - ingestion.pipeline - INFO - stage:60 - Starting prices:NVDA
+2026-10-29 12:32:38 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for NVDA (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:39 - ingestion.pipeline - INFO - stage:60 - Starting prices:NXPI
+2026-10-29 12:32:39 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for NXPI (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:39 - ingestion.pipeline - INFO - stage:60 - Starting prices:ON
+2026-10-29 12:32:39 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for ON (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:39 - ingestion.pipeline - INFO - stage:60 - Starting prices:QCOM
+2026-10-29 12:32:39 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for QCOM (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:39 - ingestion.pipeline - INFO - stage:60 - Starting prices:SQM
+2026-10-29 12:32:40 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for SQM (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:40 - ingestion.pipeline - INFO - stage:60 - Starting prices:VC
+2026-10-29 12:32:40 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for VC (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:40 - ingestion.pipeline - INFO - stage:60 - Starting prices:^GSPC
+2026-10-29 12:32:40 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for ^GSPC (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:40 - ingestion.pipeline - INFO - stage:60 - Starting prices:CARZ
+2026-10-29 12:32:41 - ingestion.market_data - INFO - ingest_price_history:211 - Ingested 6 rows for CARZ (2026-10-21..2026-10-29, interval=1d)
+2026-10-29 12:32:41 - ingestion.pipeline - INFO - stage:60 - Starting news
+2026-10-29 12:32:44 - ingestion.pipeline - INFO - stage:60 - Starting features:AMZN
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:STLA
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:TM
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:VWAGY
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:F
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:GM
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:TSLA
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:BMW.DE
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:MBG.DE
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:RNO.PA
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:000270.KS
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:AA
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:ALB
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:ALV
+2026-10-29 12:32:45 - ingestion.pipeline - INFO - stage:60 - Starting features:APTV
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:BWA
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:HMC
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:INTC
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:LEA
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:MBLY
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:MGA
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:NUE
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:NVDA
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:NXPI
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:ON
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:QCOM
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:SQM
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:VC
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:^GSPC
+2026-10-29 12:32:46 - ingestion.pipeline - INFO - stage:60 - Starting features:CARZ
+2026-10-29 12:32:47 - ingestion.pipeline - INFO - stage:60 - Starting correlations
+2026-10-29 12:32:51 - ingestion.pipeline - INFO - stage:60 - Starting events
+2026-10-29 12:32:53 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-04-17
+2026-10-29 12:33:02 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-04-30
+2026-10-29 12:33:16 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-05-06
+2026-10-29 12:33:24 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-05-21
+2026-10-29 12:33:27 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-05-27
+2026-10-29 12:33:30 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-05-28
+2026-10-29 12:33:33 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-06-10
+2026-10-29 12:33:36 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-06-16
+2026-10-29 12:33:40 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-06-23
+2026-10-29 12:33:43 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-07-28
+2026-10-29 12:33:47 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-07-29
+2026-10-29 12:33:50 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-07-30
+2026-10-29 12:33:53 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-08-12
+2026-10-29 12:33:56 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-08-17
+2026-10-29 12:34:00 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-08-18
+2026-10-29 12:34:04 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-08-19
+2026-10-29 12:34:07 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-09-16
+2026-10-29 12:34:12 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-09-18
+2026-10-29 12:34:16 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-09-21
+2026-10-29 12:34:19 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-09-23
+2026-10-29 12:34:22 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-09-24
+2026-10-29 12:34:25 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-09-29
+2026-10-29 12:34:29 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-10-01
+2026-10-29 12:34:32 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-10-02
+2026-10-29 12:34:36 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-10-23
+2026-10-29 12:34:39 - ingestion.pipeline - INFO - stage:60 - Starting event-study:STLA-2026-10-28
+2026-10-29 12:34:46 - ingestion.pipeline - INFO - stage:60 - Starting event-context
+2026-10-29 12:35:00 - ingestion.pipeline - INFO - stage:60 - Starting fingerprints
+2026-10-29 12:35:19 - ingestion.pipeline - INFO - stage:60 - Starting search-index
+2026-10-29 12:35:20 - ingestion.pipeline - ERROR - stage:67 - Stage search-index failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 62, in stage
+    result = action()
+             ^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 153, in <lambda>
+    stage("search-index", lambda: build_vector_store(db_path=warehouse))
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ai\vector_store.py", line 354, in build_vector_store
+    documents = collect_all_documents(db_path=db_path)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ai\vector_store.py", line 271, in collect_all_documents
+    + collect_relationship_documents(db_path=db_path)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ai\vector_store.py", line 101, in collect_relationship_documents
+    text = " ".join(
+           ^^^^^^^^^
+TypeError: sequence item 2: expected str instance, float found
+2026-10-29 12:35:20 - ingestion.pipeline - INFO - stage:60 - Starting quality
+2026-10-29 12:35:21 - api.maintenance - ERROR - send_failure_alert:35 - Maintenance alert: {'job_id': 'de9f2325467e4fe4974734d0eee62974', 'kind': 'refresh', 'status': 'degraded', 'timestamp': '2026-10-29T07:05:21.155946+00:00'}
+2026-10-29 23:49:45 - api.main - INFO - setup_logging:85 - Logging configured - Level: INFO
+2026-10-29 23:49:56 - faiss.loader - INFO - <module>:160 - Loading faiss with AVX2 support.
+2026-10-29 23:49:56 - faiss.loader - INFO - <module>:166 - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-29 23:49:56 - faiss.loader - INFO - <module>:186 - Loading faiss.
+2026-10-29 23:49:58 - faiss.loader - INFO - <module>:189 - Successfully loaded faiss.
+2026-10-29 23:50:35 - api.main - INFO - create_app:166 - Stellantis Market Intelligence application initialized
+2026-10-29 23:50:35 - waitress - INFO - log_info:449 - Serving on http://127.0.0.1:8000

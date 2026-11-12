@@ -1,0 +1,15 @@
+COPY abnormal_returns FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/abnormal_returns.parquet' (FORMAT 'parquet');
+COPY companies FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/companies.parquet' (FORMAT 'parquet');
+COPY correlations FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/correlations.parquet' (FORMAT 'parquet');
+COPY documents FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/documents.parquet' (FORMAT 'parquet');
+COPY document_chunks FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/document_chunks.parquet' (FORMAT 'parquet');
+COPY event_news FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/event_news.parquet' (FORMAT 'parquet');
+COPY event_returns FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/event_returns.parquet' (FORMAT 'parquet');
+COPY historical_events FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/historical_events.parquet' (FORMAT 'parquet');
+COPY market_events FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/market_events.parquet' (FORMAT 'parquet');
+COPY news FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/news.parquet' (FORMAT 'parquet');
+COPY price_data FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/price_data.parquet' (FORMAT 'parquet');
+COPY price_features FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/price_features.parquet' (FORMAT 'parquet');
+COPY relationships FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/relationships.parquet' (FORMAT 'parquet');
+COPY relationship_evidence FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/relationship_evidence.parquet' (FORMAT 'parquet');
+COPY rolling_correlations FROM 'D:/STLA_StockTreeProject/stellantis-market-intelligence/data/backups/20261029T070227Z-01cc06eb/warehouse/rolling_correlations.parquet' (FORMAT 'parquet');

@@ -1,0 +1,246 @@
+# Stellantis Market Impact Intelligence - Company Universe (Phase 1)
+#
+# This file is the single source of truth for which companies the system tracks.
+# IMPORTANT: `relationship_type` here is only a coarse category label (e.g. "oem",
+# "supplier") for filtering/grouping. It is NOT a claim of a documented business
+# relationship with Stellantis. Documented relationships (with evidence) are
+# established separately in Phase 11/12 (relationships/*).
+#
+# Fields:
+#   ticker            - exchange ticker symbol (as used by the market-data provider)
+#   company_name      - full legal / common name
+#   exchange          - primary listing exchange
+#   sector            - broad sector classification
+#   industry          - narrower industry classification
+#   country           - country of primary listing / headquarters
+#   relationship_type - coarse category: self | oem | supplier_tier1 | supplier_tier2 |
+#                        semiconductor | battery | ev | adas | autonomous_driving |
+#                        software | cloud_technology | logistics | commodity | other
+
+companies:
+  - ticker: AMZN
+    company_name: Amazon.com, Inc.
+    exchange: NASDAQ
+    sector: Consumer Cyclical
+    industry: Internet Retail and Cloud Services
+    country: United States
+    relationship_type: cloud_technology
+
+  - ticker: STLA
+    company_name: Stellantis N.V.
+    exchange: NYSE
+    sector: Consumer Cyclical
+    industry: Auto Manufacturers
+    country: Netherlands
+    relationship_type: self
+
+  - ticker: TM
+    company_name: Toyota Motor Corporation
+    exchange: NYSE
+    sector: Consumer Cyclical
+    industry: Auto Manufacturers
+    country: Japan
+    relationship_type: oem
+
+  - ticker: VWAGY
+    company_name: Volkswagen AG
+    exchange: OTC
+    sector: Consumer Cyclical
+    industry: Auto Manufacturers
+    country: Germany
+    relationship_type: oem
+
+  - ticker: F
+    company_name: Ford Motor Company
+    exchange: NYSE
+    sector: Consumer Cyclical
+    industry: Auto Manufacturers
+    country: United States
+    relationship_type: oem
+
+  - ticker: GM
+    company_name: General Motors Company
+    exchange: NYSE
+    sector: Consumer Cyclical
+    industry: Auto Manufacturers
+    country: United States
+    relationship_type: oem
+
+  - ticker: TSLA
+    company_name: Tesla, Inc.
+    exchange: NASDAQ
+    sector: Consumer Cyclical
+    industry: Auto Manufacturers
+    country: United States
+    relationship_type: oem
+
+  - ticker: BMW.DE
+    company_name: Bayerische Motoren Werke AG
+    exchange: XETRA
+    sector: Consumer Cyclical
+    industry: Auto Manufacturers
+    country: Germany
+    relationship_type: oem
+
+  - ticker: MBG.DE
+    company_name: Mercedes-Benz Group AG
+    exchange: XETRA
+    sector: Consumer Cyclical
+    industry: Auto Manufacturers
+    country: Germany
+    relationship_type: oem
+
+  - ticker: RNO.PA
+    company_name: Renault S.A.
+    exchange: Euronext Paris
+    sector: Consumer Cyclical
+    industry: Auto Manufacturers
+    country: France
+    relationship_type: oem
+
+  - ticker: 000270.KS
+    company_name: Kia Corporation
+    exchange: KRX
+    sector: Consumer Cyclical
+    industry: Auto Manufacturers
+    country: South Korea
+    relationship_type: oem
+
+  # Suppliers / technology partners referenced in config/relationships.yaml - added so the
+  # ecosystem graph, impact analysis, and AI investigation never show a bare ticker.
+  - ticker: AA
+    company_name: Alcoa Corporation
+    exchange: NYSE
+    sector: Basic Materials
+    industry: Aluminum
+    country: United States
+    relationship_type: commodity
+
+  - ticker: ALB
+    company_name: Albemarle Corporation
+    exchange: NYSE
+    sector: Basic Materials
+    industry: Specialty Chemicals
+    country: United States
+    relationship_type: commodity
+
+  - ticker: ALV
+    company_name: Autoliv, Inc.
+    exchange: NYSE
+    sector: Consumer Cyclical
+    industry: Auto Parts
+    country: Sweden
+    relationship_type: supplier_tier1
+
+  - ticker: APTV
+    company_name: Aptiv PLC
+    exchange: NYSE
+    sector: Consumer Cyclical
+    industry: Auto Parts
+    country: Ireland
+    relationship_type: supplier_tier1
+
+  - ticker: BWA
+    company_name: BorgWarner Inc.
+    exchange: NYSE
+    sector: Consumer Cyclical
+    industry: Auto Parts
+    country: United States
+    relationship_type: supplier_tier1
+
+  - ticker: HMC
+    company_name: Honda Motor Co., Ltd.
+    exchange: NYSE
+    sector: Consumer Cyclical
+    industry: Auto Manufacturers
+    country: Japan
+    relationship_type: oem
+
+  - ticker: INTC
+    company_name: Intel Corporation
+    exchange: NASDAQ
+    sector: Technology
+    industry: Semiconductors
+    country: United States
+    relationship_type: semiconductor
+
+  - ticker: LEA
+    company_name: Lear Corporation
+    exchange: NYSE
+    sector: Consumer Cyclical
+    industry: Auto Parts
+    country: United States
+    relationship_type: supplier_tier1
+
+  - ticker: MBLY
+    company_name: Mobileye Global Inc.
+    exchange: NASDAQ
+    sector: Technology
+    industry: Autonomous Driving / ADAS
+    country: Israel
+    relationship_type: adas
+
+  - ticker: MGA
+    company_name: Magna International Inc.
+    exchange: NYSE
+    sector: Consumer Cyclical
+    industry: Auto Parts
+    country: Canada
+    relationship_type: supplier_tier1
+
+  - ticker: NUE
+    company_name: Nucor Corporation
+    exchange: NYSE
+    sector: Basic Materials
+    industry: Steel
+    country: United States
+    relationship_type: commodity
+
+  - ticker: NVDA
+    company_name: NVIDIA Corporation
+    exchange: NASDAQ
+    sector: Technology
+    industry: Semiconductors
+    country: United States
+    relationship_type: semiconductor
+
+  - ticker: NXPI
+    company_name: NXP Semiconductors N.V.
+    exchange: NASDAQ
+    sector: Technology
+    industry: Semiconductors
+    country: Netherlands
+    relationship_type: semiconductor
+
+  - ticker: "ON"
+    company_name: ON Semiconductor Corporation
+    exchange: NASDAQ
+    sector: Technology
+    industry: Semiconductors
+    country: United States
+    relationship_type: semiconductor
+
+  - ticker: QCOM
+    company_name: QUALCOMM Incorporated
+    exchange: NASDAQ
+    sector: Technology
+    industry: Semiconductors
+    country: United States
+    relationship_type: semiconductor
+
+  - ticker: SQM
+    company_name: Sociedad Química y Minera de Chile S.A.
+    exchange: NYSE
+    sector: Basic Materials
+    industry: Specialty Chemicals
+    country: Chile
+    relationship_type: commodity
+
+  - ticker: VC
+    company_name: Visteon Corporation
+    exchange: NYSE
+    sector: Consumer Cyclical
+    industry: Auto Parts
+    country: United States
+    relationship_type: supplier_tier1
+

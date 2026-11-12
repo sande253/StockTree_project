@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# Development
+.env
+.env.local
+*.log
+
+# Data (keep structure, exclude files)
+data/raw/*.parquet
+data/processed/*.parquet
+data/features/*.parquet
+data/reports/*.pdf
+data/warehouse/*.duckdb
+data/warehouse/*.duckdb.wal
+data/vector_store/index.faiss
+data/vector_store/*.pkl
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore

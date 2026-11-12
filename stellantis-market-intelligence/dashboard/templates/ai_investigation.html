@@ -1,0 +1,478 @@
+{% extends "base.html" %}
+{% block title %}AI Investigation{% endblock %}
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.4.17/dist/purify.min.js" defer></script>
+{% endblock %}
+{% block content %}
+<div class="ai-investigation-page">
+  <header class="investigation-heading">
+    <div>
+      <p class="eyebrow">MARKET IMPACT INTELLIGENCE</p>
+      <h1>STLA Investigation Copilot</h1>
+      <p>Investigate one event at a time. Results use stored records and cited sources.</p>
+      <details class="coverage-details">
+        <summary>Knowledge base · {{ coverage.news_articles }} articles · {{ coverage.events }} events · {{ coverage.verified_relationships }} verified links</summary>
+        <div class="coverage-body">
+          <span>{{ coverage.configured_feeds }} configured public feeds</span>
+          <span>{{ coverage.indexed_documents }} indexed documents</span>
+          <span>Latest article: {{ coverage.latest_news_date or "none ingested" }}</span>
+          {% if not coverage.event_news_links %}<span class="coverage-warning">No articles are linked to events yet. Refresh public sources to improve catalyst answers.</span>{% endif %}
+          {% for source in coverage.unavailable_feeds %}<span class="coverage-warning">{{ source }}</span>{% endfor %}
+        </div>
+      </details>
+    </div>
+    <label class="event-picker">
+      <span>Event context</span>
+      <select id="event-context" {% if not events %}disabled{% endif %}>
+        {% for e in events %}
+        <option value="{{ e.event_id }}" {% if e.event_id == selected_event_id %}selected{% endif %}>
+          {{ e.event_date.strftime('%b %d, %Y') if e.event_date else e.event_id }} · {{ e.event_type or "Unclassified" }} ({{ "%.2f"|format(e['return'] * 100) }}%)
+        </option>
+        {% else %}
+        <option value="">No stored events</option>
+        {% endfor %}
+      </select>
+    </label>
+  </header>
+
+  <section class="chat-workspace" aria-label="STLA investigation chat">
+    <div class="chat-column">
+      <div class="chat-toolbar">
+        <div><span class="connection-dot" aria-hidden="true"></span><span>Evidence-grounded chat</span></div>
+        <button id="new-chat" type="button" class="quiet-button">New conversation</button>
+      </div>
+
+      <div id="chat-messages" class="chat-messages" aria-live="polite" aria-relevant="additions text">
+        <article class="chat-message assistant-message">
+          <div class="message-mark" aria-hidden="true">AI</div>
+          <div class="message-content markdown-content">
+            <h2>Ask about this event</h2>
+            <p>Event data, documented links, and historical comparisons.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="question-starters" aria-label="Suggested questions">
+        <button type="button" data-question="What happened in this event?">Event summary</button>
+        <button type="button" data-question="Show the historical correlation and sample size for Ford versus STLA.">Correlation</button>
+        <button type="button" data-question="Show the recent stored STLA closing-price trend.">Price trend</button>
+        <button type="button" data-question="What official announcements were published near this event?">Nearby news</button>
+      </div>
+
+      <form id="chat-form" class="chat-composer">
+        <label class="visually-hidden" for="chat-question">Ask an investigation question</label>
+        <textarea id="chat-question" rows="2" maxlength="1200" placeholder="Ask a question about this event..." required></textarea>
+        <button id="send-question" type="submit" aria-label="Send question" title="Send question">
+          <span aria-hidden="true">↑</span>
+        </button>
+      </form>
+      <p class="chat-disclaimer">Research only. Correlation is not causation. Not investment advice.</p>
+    </div>
+
+  </section>
+</div>
+
+<script>
+  (() => {
+    const form = document.getElementById("chat-form");
+    const questionInput = document.getElementById("chat-question");
+    const eventSelect = document.getElementById("event-context");
+    const messages = document.getElementById("chat-messages");
+    const sendButton = document.getElementById("send-question");
+    let history = [];
+    const chartInstances = [];
+
+    function renderMarkdown(target, content) {
+      if (window.marked && window.DOMPurify) {
+        target.innerHTML = window.DOMPurify.sanitize(window.marked.parse(content, { gfm: true }));
+      } else {
+        target.textContent = content;
+      }
+    }
+
+    function clearCharts() {
+      chartInstances.forEach((instance) => instance.destroy());
+      chartInstances.length = 0;
+    }
+
+    function appendMessage(role, content, pending = false) {
+      const article = document.createElement("article");
+      article.className = `chat-message ${role === "user" ? "user-message" : "assistant-message"}`;
+      const mark = document.createElement("div");
+      mark.className = "message-mark";
+      mark.setAttribute("aria-hidden", "true");
+      mark.textContent = role === "user" ? "YOU" : "AI";
+      const body = document.createElement("div");
+      body.className = role === "assistant" ? "message-content markdown-content" : "message-content user-content";
+      if (role === "assistant" && !pending) {
+        renderMarkdown(body, content);
+      } else {
+        body.textContent = content;
+      }
+      if (pending) body.classList.add("pending-message");
+      article.append(mark, body);
+      messages.append(article);
+      messages.scrollTop = messages.scrollHeight;
+      return article;
+    }
+
+    function renderSources(sources) {
+      const section = document.createElement("details");
+      section.className = "answer-sources";
+      const heading = document.createElement("summary");
+      heading.textContent = `Sources · ${sources.length}`;
+      const list = document.createElement("div");
+      list.className = "chat-sources";
+      section.append(heading, list);
+      if (!sources.length) {
+        const empty = document.createElement("p");
+        empty.className = "source-empty";
+        empty.textContent = "No matching sources were retrieved.";
+        list.append(empty);
+        return section;
+      }
+      sources.forEach((source, index) => {
+        const item = document.createElement("article");
+        item.className = "source-item";
+        const heading = document.createElement("strong");
+        heading.textContent = `[${index + 1}] ${source.source || source.document_type || "Source"}`;
+        const text = document.createElement("p");
+        const sourceText = source.text || "Source content unavailable.";
+        text.textContent = sourceText.length > 320 ? `${sourceText.slice(0, 320)}...` : sourceText;
+        item.append(heading, text);
+        if (source.url && /^https?:\/\//i.test(source.url)) {
+          const link = document.createElement("a");
+          link.href = source.url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "Open evidence";
+          item.append(link);
+        }
+        list.append(item);
+      });
+      return section;
+    }
+
+    function renderVisual(visual) {
+      const section = document.createElement("section");
+      section.className = "response-visual";
+      const heading = document.createElement("h3");
+      heading.textContent = visual.title || "Analysis";
+      section.append(heading);
+      if (visual.type === "network") {
+        if (!visual.edges.length) {
+          const empty = document.createElement("p");
+          empty.className = "visual-note";
+          empty.textContent = "No documented relationship edges are available for this question.";
+          section.append(empty);
+          return section;
+        }
+        const graph = document.createElement("div");
+        graph.className = "relationship-visual";
+        const root = document.createElement("div");
+        root.className = "graph-root";
+        root.textContent = "STELLANTIS · STLA";
+        graph.append(root);
+        const edges = document.createElement("div");
+        edges.className = "graph-edges";
+        visual.edges.forEach((edge) => {
+          const row = document.createElement("div");
+          row.className = "graph-edge-row";
+          const link = document.createElement("span");
+          link.className = "graph-link";
+          link.textContent = "→";
+          const node = document.createElement("span");
+          node.className = "graph-node";
+          node.textContent = edge.target;
+          const type = document.createElement("span");
+          type.className = "graph-edge-type";
+          type.textContent = edge.type.replaceAll("_", " ");
+          row.append(link, node, type);
+          edges.append(row);
+        });
+        graph.append(edges);
+        section.append(graph);
+        return section;
+      }
+      if (!['bars', 'line'].includes(visual.type) || !visual.labels.length) {
+        const empty = document.createElement("p");
+        empty.className = "visual-note";
+        empty.textContent = visual.message || "No comparable stored values are available.";
+        section.append(empty);
+        return section;
+      }
+      if (!window.Chart) {
+        const table = document.createElement("table");
+        table.className = "visual-fallback-table";
+        visual.labels.forEach((label, index) => {
+          const row = table.insertRow();
+          row.insertCell().textContent = label;
+          const value = Number(visual.values[index]);
+          row.insertCell().textContent = visual.unit === "price"
+            ? `$${value.toFixed(2)}`
+            : visual.unit === "percent"
+              ? `${value}%`
+              : visual.unit === "correlation"
+                ? value.toFixed(2)
+                : String(visual.values[index]);
+        });
+        section.append(table);
+        return section;
+      }
+      const wrap = document.createElement("div");
+      wrap.className = "chat-chart-wrap";
+      const canvas = document.createElement("canvas");
+      canvas.setAttribute("role", "img");
+      canvas.setAttribute("aria-label", visual.title || "Investigation data chart");
+      wrap.append(canvas);
+      section.append(wrap);
+      const isLine = visual.type === "line";
+      chartInstances.push(new window.Chart(canvas, {
+        type: isLine ? "line" : "bar",
+        data: {
+          labels: visual.labels,
+          datasets: [{
+            data: visual.values,
+            label: visual.title,
+            backgroundColor: isLine ? "rgba(66, 211, 155, 0.12)" : visual.values.map((value) => value < 0 ? "#e27668" : "#42d39b"),
+            borderColor: isLine ? "#42d39b" : undefined,
+            borderWidth: isLine ? 2 : 0,
+            fill: isLine,
+            tension: isLine ? 0.28 : 0,
+            pointRadius: isLine ? 0 : undefined,
+            borderRadius: isLine ? 0 : 3,
+            maxBarThickness: 36,
+          }],
+        },
+        options: {
+          ...(isLine ? {} : { indexAxis: "y" }),
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 520, easing: "easeOutQuart" },
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: (item) => visual.unit === "percent" ? `${item.raw}%` : visual.unit === "price" ? `$${Number(item.raw).toFixed(2)}` : String(item.raw) } } },
+          scales: {
+            x: { ticks: { color: "#a9c0c7" }, grid: { color: "rgba(164, 198, 203, 0.12)" } },
+            y: { ticks: { color: "#d8e6e5" }, grid: { display: false } },
+          },
+        },
+      }));
+      return section;
+    }
+
+    async function sendQuestion(question) {
+      const cleanQuestion = question.trim();
+      if (!cleanQuestion) return;
+      const previousHistory = history.slice(-8).map((turn) => ({
+        role: turn.role,
+        content: turn.content.slice(0, 1200),
+      }));
+      history.push({ role: "user", content: cleanQuestion });
+      appendMessage("user", cleanQuestion);
+      const pendingArticle = appendMessage("assistant", "Reviewing available evidence...", true);
+      const pending = pendingArticle.querySelector(".message-content");
+      sendButton.disabled = true;
+      questionInput.disabled = true;
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": document.querySelector('meta[name="csrf-token"]').content,
+          },
+          body: JSON.stringify({
+            question: cleanQuestion,
+            event_id: eventSelect.value || null,
+            history: previousHistory,
+          }),
+        });
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.error || "The chat request could not be completed.");
+        pending.classList.remove("pending-message");
+        renderMarkdown(pending, payload.answer);
+        history.push({ role: "assistant", content: payload.answer });
+        history = history.slice(-8);
+        const visual = renderVisual(payload.visual || { type: "empty", message: "No visual data is available." });
+        const sources = renderSources(payload.sources || []);
+        pendingArticle.after(visual);
+        visual.after(sources);
+      } catch (error) {
+        pending.classList.remove("pending-message");
+        renderMarkdown(pending, `**Unable to answer.** ${error.message}`);
+        history.push({ role: "assistant", content: error.message });
+      } finally {
+        sendButton.disabled = false;
+        questionInput.disabled = false;
+        questionInput.focus({ preventScroll: true });
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const question = questionInput.value;
+      questionInput.value = "";
+      sendQuestion(question);
+    });
+    document.querySelectorAll("[data-question]").forEach((button) => {
+      button.addEventListener("click", () => {
+        questionInput.value = button.dataset.question;
+        sendQuestion(questionInput.value);
+        questionInput.value = "";
+      });
+    });
+    document.getElementById("new-chat").addEventListener("click", () => {
+      history = [];
+      clearCharts();
+      messages.replaceChildren();
+      appendMessage("assistant", "## What would you like to investigate?\n\nAsk about the selected event, documented relationships, historical behavior, or available evidence.");
+    });
+    eventSelect.addEventListener("change", () => {
+      history = [];
+      clearCharts();
+      messages.replaceChildren();
+      appendMessage("assistant", "## Event context changed\n\nAsk a question about the newly selected event.");
+    });
+    questionInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        form.requestSubmit();
+      }
+    });
+  })();
+</script>
+
+<style>
+.content:has(.ai-investigation-page) {
+  max-width: none;
+  min-height: 0;
+  padding: 0;
+  background: #071a29;
+}
+.ai-investigation-page {
+  --chat-bg: #071a29;
+  --chat-surface: #0b2232;
+  --chat-raised: #102d3d;
+  --chat-border: #204252;
+  --chat-text: #e1efed;
+  --chat-muted: #9bb3b7;
+  --chat-green: #42d39b;
+  max-width: 1080px;
+  min-height: calc(100vh - 150px);
+  margin: 0 auto;
+  padding: 1.35rem clamp(1rem, 2.2vw, 2rem) 1.75rem;
+  background: var(--chat-bg);
+  color: var(--chat-text);
+}
+.investigation-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+.investigation-heading h1 { margin: 0 0 0.3rem; color: var(--chat-text); -webkit-text-fill-color: currentColor; font-size: 1.65rem; }
+.investigation-heading > div > p:last-child { margin: 0; color: var(--chat-muted); font-size: 0.9rem; }
+.coverage-details { width: fit-content; max-width: 100%; margin-top: 0.65rem; color: var(--chat-muted); font-size: 0.7rem; }
+.coverage-details summary { color: #a9c7c4; cursor: pointer; }
+.coverage-body { display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; max-width: 620px; margin-top: 0.45rem; padding: 0.55rem; border: 1px solid var(--chat-border); background: var(--chat-surface); }
+.coverage-warning { flex-basis: 100%; color: #e9c47d; }
+.eyebrow { margin: 0 0 0.4rem; color: var(--chat-green); font-family: var(--mono); font-size: 0.67rem; font-weight: 700; }
+.event-picker { display: grid; gap: 0.35rem; min-width: min(100%, 340px); color: var(--chat-muted); font-size: 0.75rem; font-weight: 600; }
+.event-picker select { width: 100%; min-height: 40px; padding: 0.55rem 0.7rem; border: 1px solid var(--chat-border); border-radius: 3px; background: var(--chat-surface); color: var(--chat-text); }
+.chat-workspace { display: block; height: min(72vh, 760px); min-height: 560px; border: 1px solid var(--chat-border); border-radius: 5px; background: var(--chat-surface); overflow: hidden; }
+.chat-column { display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; height: 100%; min-width: 0; }
+.chat-toolbar { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 0.65rem 1rem; border-bottom: 1px solid var(--chat-border); color: var(--chat-text); font-size: 0.82rem; font-weight: 600; }
+.chat-toolbar > div { display: flex; align-items: center; gap: 0.55rem; }
+.connection-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--chat-green); box-shadow: 0 0 10px rgb(66 211 155 / 0.45); }
+.quiet-button { border: 1px solid var(--chat-border); border-radius: 3px; padding: 0.4rem 0.65rem; background: transparent; color: var(--chat-muted); font: inherit; cursor: pointer; }
+.quiet-button:hover { color: var(--chat-text); border-color: var(--chat-green); }
+.chat-messages { display: flex; flex-direction: column; gap: 0.8rem; min-height: 0; overflow-y: auto; padding: 1rem; }
+.chat-message { display: flex; flex-direction: row; align-items: flex-start; gap: 0.65rem; width: min(100%, 860px); min-width: 0; animation: answer-enter 280ms ease-out both; }
+.assistant-message { align-self: flex-start; }
+.user-message { align-self: flex-end; flex-direction: row-reverse; width: min(82%, 680px); max-width: 100%; min-width: min(260px, 100%); }
+.message-mark { display: grid; place-items: center; flex: 0 0 28px; width: 28px; height: 28px; border: 1px solid var(--chat-border); border-radius: 3px; background: #0e2c3c; color: var(--chat-green); font-family: var(--mono); font-size: 0.62rem; font-weight: 700; }
+.user-message .message-mark { background: #12533e; color: #dff9ee; }
+.message-content { display: block; flex: 0 1 calc(100% - 40px); width: calc(100% - 40px); min-width: 0; padding: 0.7rem 0.85rem; border: 1px solid var(--chat-border); border-radius: 3px; color: var(--chat-text); background: #0d2737; line-height: 1.62; overflow-wrap: anywhere; word-break: normal; }
+.user-content { background: #104634; border-color: #1b7755; }
+.pending-message { color: var(--chat-muted); }
+.markdown-content > :first-child { margin-top: 0; }
+.markdown-content > :last-child { margin-bottom: 0; }
+.markdown-content h1, .markdown-content h2, .markdown-content h3 { margin: 0.95rem 0 0.45rem; color: #f0faf7; -webkit-text-fill-color: currentColor; line-height: 1.3; }
+.markdown-content h1 { font-size: 1.3rem; }
+.markdown-content h2 { font-size: 1.12rem; }
+.markdown-content h3 { font-size: 0.98rem; }
+.markdown-content p, .markdown-content ul, .markdown-content ol { margin: 0.45rem 0; }
+.markdown-content ul, .markdown-content ol { padding-left: 1.35rem; }
+.markdown-content li + li { margin-top: 0.25rem; }
+.markdown-content strong { color: #fff; font-weight: 700; }
+.markdown-content em { color: #c4dcda; }
+.markdown-content a, .source-item a { color: var(--chat-green); text-decoration: underline; text-underline-offset: 2px; }
+.markdown-content code { padding: 0.08rem 0.28rem; border: 1px solid var(--chat-border); border-radius: 2px; background: #071a29; color: #b7f4db; font-family: var(--mono); font-size: 0.86em; }
+.markdown-content pre { overflow-x: auto; padding: 0.7rem; border: 1px solid var(--chat-border); background: #071a29; }
+.question-starters { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.65rem 0.85rem 0.35rem; }
+.question-starters button { border: 1px solid var(--chat-border); border-radius: 3px; padding: 0.42rem 0.58rem; background: #0a1e2c; color: #bdd0d1; font-size: 0.72rem; cursor: pointer; }
+.question-starters button:hover { color: var(--chat-green); border-color: #25835f; }
+.chat-composer { display: grid; grid-template-columns: minmax(0, 1fr) 42px; gap: 0.5rem; margin: 0.35rem 0.85rem; padding: 0.45rem; border: 1px solid #2b5360; border-radius: 4px; background: #071a29; }
+.chat-composer:focus-within { border-color: var(--chat-green); box-shadow: 0 0 0 2px rgb(66 211 155 / 0.12); }
+.chat-composer textarea { width: 100%; resize: vertical; min-height: 44px; max-height: 140px; border: 0; outline: 0; padding: 0.45rem; background: transparent; color: var(--chat-text); font: inherit; }
+.chat-composer textarea::placeholder { color: #829ca4; }
+.chat-composer button { align-self: end; width: 38px; height: 38px; border: 0; border-radius: 3px; background: var(--chat-green); color: #06251d; font-size: 1.45rem; font-weight: 700; cursor: pointer; }
+.chat-composer button:disabled { opacity: 0.55; cursor: wait; }
+.chat-disclaimer { margin: 0 1rem 0.7rem; color: #78939a; font-size: 0.68rem; }
+.response-visual { width: min(calc(100% - 40px), 820px); margin: -0.3rem 0 0.1rem 40px; padding: 0.65rem 0.8rem; border: 1px solid var(--chat-border); border-radius: 3px; background: #081d2b; animation: answer-enter 420ms 70ms ease-out both; }
+.response-visual h3, .answer-sources h3 { margin: 0 0 0.6rem; color: var(--chat-text); font-size: 0.78rem; font-weight: 700; }
+.visual-note { color: var(--chat-muted); font-size: 0.82rem; line-height: 1.5; }
+.chat-chart-wrap { position: relative; width: 100%; height: 190px; }
+.visual-fallback-table { width: 100%; border-collapse: collapse; color: var(--chat-text); font-size: 0.78rem; }
+.visual-fallback-table td { padding: 0.45rem; border-bottom: 1px solid var(--chat-border); }
+.visual-fallback-table td:last-child { text-align: right; font-family: var(--mono); }
+.relationship-visual { display: grid; gap: 0.55rem; }
+.graph-root { width: fit-content; max-width: 100%; padding: 0.55rem 0.7rem; border: 1px solid #27835f; background: #0d3d32; color: #a9f0d0; font-family: var(--mono); font-size: 0.68rem; }
+.graph-edges { display: grid; gap: 0.35rem; max-height: 280px; overflow-y: auto; }
+.graph-edge-row { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; align-items: center; gap: 0.45rem; padding: 0.42rem; border: 1px solid var(--chat-border); background: var(--chat-surface); }
+.graph-link { color: var(--chat-green); text-align: center; }
+.graph-node { overflow: hidden; color: var(--chat-text); font-size: 0.75rem; text-overflow: ellipsis; white-space: nowrap; }
+.graph-edge-type { color: var(--chat-muted); font-family: var(--mono); font-size: 0.58rem; }
+.answer-sources { width: min(calc(100% - 40px), 820px); margin: 0 0 0.45rem 40px; padding: 0.2rem 0; color: var(--chat-muted); animation: answer-enter 380ms 120ms ease-out both; }
+.answer-sources summary { width: fit-content; color: #a9c7c4; font-size: 0.72rem; cursor: pointer; }
+.chat-sources { display: grid; gap: 0.4rem; }
+.source-item { padding: 0.5rem; border-left: 2px solid #277c5b; background: #0b2232; color: var(--chat-muted); font-size: 0.67rem; }
+.source-item strong { display: block; margin-bottom: 0.25rem; color: #d2e3e1; font-size: 0.7rem; }
+.source-item p { margin: 0; line-height: 1.45; }
+.source-item a { display: inline-block; margin-top: 0.3rem; font-size: 0.67rem; }
+.source-empty { color: var(--chat-muted); font-size: 0.72rem; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@keyframes answer-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.graph-edge-row { animation: answer-enter 320ms ease-out both; }
+.graph-edge-row:nth-child(2) { animation-delay: 45ms; }
+.graph-edge-row:nth-child(3) { animation-delay: 90ms; }
+.graph-edge-row:nth-child(4) { animation-delay: 135ms; }
+@media (prefers-reduced-motion: reduce) {
+  .chat-message, .response-visual, .answer-sources, .graph-edge-row { animation: none; }
+  .chat-chart-wrap canvas { animation: none; }
+}
+@media (max-width: 900px) {
+  .content:has(.ai-investigation-page) { min-height: 0; }
+  .ai-investigation-page { min-height: 0; }
+  .chat-workspace { height: min(72vh, 720px); min-height: 540px; }
+}
+@media (max-width: 560px) {
+  .ai-investigation-page { padding: 1rem 0.75rem; }
+  .investigation-heading { align-items: stretch; flex-direction: column; gap: 0.8rem; }
+  .investigation-heading h1 { font-size: 1.4rem; }
+  .event-picker { min-width: 0; }
+  .chat-workspace { height: 72vh; min-height: 520px; }
+  .chat-messages { padding: 0.75rem; }
+  .chat-message { width: 100%; }
+  .user-message { width: 100%; min-width: 0; }
+  .user-message .message-content { flex-basis: calc(100% - 40px); width: calc(100% - 40px); }
+  .response-visual, .answer-sources { width: calc(100% - 36px); margin-left: 36px; }
+  .question-starters { flex-wrap: nowrap; overflow-x: auto; }
+  .question-starters button { flex: 0 0 auto; }
+}
+</style>
+{% endblock %}

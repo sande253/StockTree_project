@@ -1,0 +1,197 @@
+relationships:
+- source_entity: STLA
+  target_entity: Abarth
+  target_entity_type: brand
+  relationship_type: brand
+  description: Abarth is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Performance variants
+  geographic_exposure: Europe (Italy)
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: Alfa Romeo
+  target_entity_type: brand
+  relationship_type: brand
+  description: Alfa Romeo is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Premium / sports vehicles
+  geographic_exposure: Europe (Italy)
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: Chrysler
+  target_entity_type: brand
+  relationship_type: brand
+  description: Chrysler is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Passenger vehicles / minivans
+  geographic_exposure: North America
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: Citroën
+  target_entity_type: brand
+  relationship_type: brand
+  description: Citroën is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Mass-market passenger vehicles
+  geographic_exposure: Europe
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: DS Automobiles
+  target_entity_type: brand
+  relationship_type: brand
+  description: DS Automobiles is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Premium passenger vehicles
+  geographic_exposure: Europe (France)
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: Dodge
+  target_entity_type: brand
+  relationship_type: brand
+  description: Dodge is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Performance vehicles
+  geographic_exposure: North America
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: Fiat
+  target_entity_type: brand
+  relationship_type: brand
+  description: Fiat is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Mass-market passenger vehicles
+  geographic_exposure: Europe (Italy) / Latin America
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: Jeep
+  target_entity_type: brand
+  relationship_type: brand
+  description: Jeep is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: SUVs / off-road vehicles
+  geographic_exposure: North America (sold globally)
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: Lancia
+  target_entity_type: brand
+  relationship_type: brand
+  description: Lancia is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Passenger vehicles
+  geographic_exposure: Europe (Italy)
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: Maserati
+  target_entity_type: brand
+  relationship_type: brand
+  description: Maserati is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Luxury sports vehicles
+  geographic_exposure: Europe (Italy) / Global
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: Opel
+  target_entity_type: brand
+  relationship_type: brand
+  description: Opel is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Mass-market passenger vehicles
+  geographic_exposure: Europe (Germany)
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: Peugeot
+  target_entity_type: brand
+  relationship_type: brand
+  description: Peugeot is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Mass-market passenger vehicles
+  geographic_exposure: Europe
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: Ram
+  target_entity_type: brand
+  relationship_type: brand
+  description: Ram is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Pickup trucks / commercial vehicles
+  geographic_exposure: North America
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: Vauxhall
+  target_entity_type: brand
+  relationship_type: brand
+  description: Vauxhall is one of Stellantis's 14 owned automotive brands.
+  confidence: high
+  date_discovered: '2026-10-04'
+  source: Stellantis official corporate site
+  evidence_url: https://www.stellantis.com/en/brands
+  business_area: Mass-market passenger vehicles
+  geographic_exposure: United Kingdom
+  target_entity_ticker: null
+- source_entity: STLA
+  target_entity: QCOM
+  target_entity_type: company
+  relationship_type: technology_partner
+  description: "The April 2022 announcement documents a multi-year Snapdragon technology collaboration. Planned rollout dates and current commercial scope have not been independently revalidated."
+  confidence: medium
+  date_discovered: '2026-10-29'
+  source: Stellantis official Qualcomm announcement
+  evidence_url: https://www.stellantis.com/en/news/press-releases/2022/april/stellantis-and-qualcomm-collaborate-to-power-new-vehicle-platforms-with-snapdragon-digital-chassis-solutions
+  evidence_date: '2022-04-14'
+  last_reviewed: '2026-10-29'
+  evidence_scope: announcement
+  business_area: Automotive semiconductors and digital cockpit
+  target_entity_ticker: QCOM
+- source_entity: STLA
+  target_entity: Amazon
+  target_entity_type: company
+  relationship_type: cloud_partner
+  description: "The January 2022 announcement documents AWS vehicle-platform cloud agreements. This is historical announcement evidence, not confirmation that all original software plans remain active."
+  confidence: medium
+  date_discovered: '2026-10-29'
+  source: Amazon official Stellantis announcement
+  evidence_url: https://press.aboutamazon.com/2022/1/amazon-and-stellantis-collaborate-to-introduce-customer-centric-connected-experiences-across-millions-of-vehicles-helping-accelerate-stellantis-software-transformation
+  evidence_date: '2022-01-05'
+  last_reviewed: '2026-10-29'
+  evidence_scope: announcement
+  business_area: Cloud vehicle platforms
+  target_entity_ticker: AMZN

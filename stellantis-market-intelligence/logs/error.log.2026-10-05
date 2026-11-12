@@ -1,0 +1,104 @@
+2026-10-05 12:39:54 - api.main - ERROR - handle_unexpected_error:153 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\dashboard\routes.py", line 34, in executive_overview
+    combined = build_all_combined_profiles(graph, event_id=latest_event["event_id"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 166, in build_all_combined_profiles
+    return [
+           ^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 167, in <listcomp>
+    build_combined_profile(graph, n["entity_id"], event_id=event_id, db_path=db_path)
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 144, in build_combined_profile
+    correlation = load_statistical_correlation(ticker, db_path=db_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 51, in load_statistical_correlation
+    row = conn.execute(
+          ^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: Could not convert string 'F' to DOUBLE when casting from source column ticker
+
+LINE 4:             WHERE ticker = ? AND reference_ticker = ?
+                          ^
+2026-10-05 12:40:15 - api.main - ERROR - handle_unexpected_error:153 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\dashboard\routes.py", line 34, in executive_overview
+    combined = build_all_combined_profiles(graph, event_id=latest_event["event_id"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 166, in build_all_combined_profiles
+    return [
+           ^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 167, in <listcomp>
+    build_combined_profile(graph, n["entity_id"], event_id=event_id, db_path=db_path)
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 144, in build_combined_profile
+    correlation = load_statistical_correlation(ticker, db_path=db_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 51, in load_statistical_correlation
+    row = conn.execute(
+          ^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: Could not convert string 'F' to DOUBLE when casting from source column ticker
+
+LINE 4:             WHERE ticker = ? AND reference_ticker = ?
+                          ^
+2026-10-05 12:41:50 - api.main - ERROR - handle_unexpected_error:153 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\dashboard\routes.py", line 34, in executive_overview
+    combined = build_all_combined_profiles(graph, event_id=latest_event["event_id"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 166, in build_all_combined_profiles
+    return [
+           ^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 167, in <listcomp>
+    build_combined_profile(graph, n["entity_id"], event_id=event_id, db_path=db_path)
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 144, in build_combined_profile
+    correlation = load_statistical_correlation(ticker, db_path=db_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 51, in load_statistical_correlation
+    row = conn.execute(
+          ^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: Could not convert string 'F' to DOUBLE when casting from source column ticker
+
+LINE 4:             WHERE ticker = ? AND reference_ticker = ?
+                          ^
+2026-10-05 12:42:44 - api.main - ERROR - handle_unexpected_error:153 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\dashboard\routes.py", line 34, in executive_overview
+    combined = build_all_combined_profiles(graph, event_id=latest_event["event_id"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 166, in build_all_combined_profiles
+    return [
+           ^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 167, in <listcomp>
+    build_combined_profile(graph, n["entity_id"], event_id=event_id, db_path=db_path)
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 144, in build_combined_profile
+    correlation = load_statistical_correlation(ticker, db_path=db_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\relationships\combined_profile.py", line 51, in load_statistical_correlation
+    row = conn.execute(
+          ^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: Could not convert string 'F' to DOUBLE when casting from source column ticker
+
+LINE 4:             WHERE ticker = ? AND reference_ticker = ?
+                          ^

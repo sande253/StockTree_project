@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}Historical Events{% endblock %}
+{% block content %}
+
+<div class="hero-section">
+  <h1>
+    <span class="hero-icon">🕰️</span>
+    Historical Events
+  </h1>
+  <p class="hero-subtitle">Every STLA event fingerprint on record - search, compare, and find similar past reactions</p>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon">📦</div>
+    <div class="stat-value">{{ historical|length }}</div>
+    <div class="stat-label">Fingerprinted Events</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">📉</div>
+    <div class="stat-value">{{ historical|selectattr('stla_return', 'lt', 0)|list|length }}</div>
+    <div class="stat-label">Negative Reactions</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">📈</div>
+    <div class="stat-value">{{ historical|selectattr('stla_return', 'ge', 0)|list|length }}</div>
+    <div class="stat-label">Positive Reactions</div>
+  </div>
+</div>
+
+{% if compare_id %}
+<section class="card event-highlight">
+  <div class="card-header">
+    <h2><span class="section-icon">🔎</span>Similar to {{ compare_id }}</h2>
+    <a href="{{ url_for('dashboard.historical_events') }}" class="table-action">Clear comparison</a>
+  </div>
+  {% if similar %}
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr><th>Event</th><th>Date</th><th>Similarity</th><th>Type</th><th>STLA return</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for s in similar %}
+        <tr>
+          <td>{{ s.event_id }}</td>
+          <td>{{ s.event_date.strftime('%b %d, %Y') if s.event_date else '-' }}</td>
+          <td><span class="badge badge-info">{{ s.similarity }}%</span></td>
+          <td>{{ s.event_type or "Unclassified" }}</td>
+          <td class="{{ 'neg' if s.stla_return < 0 else 'pos' }}">{{ "%.2f"|format(s.stla_return * 100) }}%</td>
+          <td><a href="{{ url_for('dashboard.impact_analysis', event_id=s.event_id) }}" class="table-action">View impact &rarr;</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="muted">Insufficient distinguishing event data to compare historical events reliably.</p>
+  {% endif %}
+</section>
+{% endif %}
+
+<section class="card">
+  <div class="card-header">
+    <h2><span class="section-icon">📜</span>All Fingerprinted Events</h2>
+  </div>
+  {% if historical %}
+  <div class="search-box">
+    <input type="text" id="historical-filter" placeholder="Filter by event type or description...">
+  </div>
+  <div class="table-container">
+    <table class="data-table" id="historical-table">
+      <thead>
+        <tr>
+          <th>Date</th><th>Type</th><th>STLA return</th><th>Sector</th><th>Market</th>
+          <th>Supplier reaction</th><th>Competitor reaction</th><th>Recovery (days)</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for h in historical %}
+        <tr data-event_type="{{ (h.event_type or '')|lower }}" data-event_description="{{ (h.event_description or '')|lower }}">
+          <td>{{ h.event_date.strftime('%b %d, %Y') if h.event_date else '-' }}</td>
+          <td><span class="event-type-badge">{{ h.event_type or "Unclassified" }}</span></td>
+          <td class="{{ 'neg' if h.stla_return < 0 else 'pos' }}">{{ "%.2f"|format(h.stla_return * 100) if h.stla_return is not none else "N/A" }}%</td>
+          <td>{{ "%.2f"|format(h.sector_return * 100) + "%" if h.sector_return is not none else "N/A" }}</td>
+          <td>{{ "%.2f"|format(h.market_return * 100) + "%" if h.market_return is not none else "N/A" }}</td>
+          <td>{{ "%.2f"|format(h.supplier_reaction * 100) + "%" if h.supplier_reaction is not none else "N/A" }}</td>
+          <td>{{ "%.2f"|format(h.competitor_reaction * 100) + "%" if h.competitor_reaction is not none else "N/A" }}</td>
+          <td>{{ h.recovery_time_days if h.recovery_time_days is not none else "N/A" }}</td>
+          <td>
+            <a href="{{ url_for('dashboard.historical_events', event_id=h.event_id) }}" class="table-action">Find similar</a>
+            &middot;
+            <a href="{{ url_for('dashboard.impact_analysis', event_id=h.event_id) }}" class="table-action">Impact &rarr;</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <script>
+    (function () {
+      const filterInput = document.getElementById("historical-filter");
+      const rows = document.querySelectorAll("#historical-table tbody tr");
+      filterInput.addEventListener("input", () => {
+        const q = filterInput.value.trim().toLowerCase();
+        rows.forEach((row) => {
+          const haystack = row.dataset.event_type + " " + row.dataset.event_description;
+          row.style.display = haystack.includes(q) ? "" : "none";
+        });
+      });
+    })();
+  </script>
+  {% else %}
+  <section class="card empty-state">
+    <div class="empty-icon">🕰️</div>
+    <h3>No Historical Events Yet</h3>
+    <p>Fingerprints are built automatically the first time an event is investigated.</p>
+  </section>
+  {% endif %}
+</section>
+
+<style>
+.hero-section { text-align: center; padding: 2rem 0 3rem; }
+.hero-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
+.hero-subtitle { font-size: 1.125rem; color: var(--text-secondary); margin: 0; }
+.stat-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.section-icon { margin-right: 0.5rem; }
+.table-container { overflow-x: auto; }
+.event-type-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+}
+.event-highlight {
+  background: linear-gradient(135deg, rgba(255, 176, 0, 0.06) 0%, rgba(255, 123, 0, 0.05) 100%);
+  border-color: rgba(255, 176, 0, 0.3);
+}
+.empty-state { text-align: center; padding: 3rem 2rem; }
+.empty-icon { font-size: 4rem; margin-bottom: 1rem; opacity: 0.5; }
+</style>
+{% endblock %}

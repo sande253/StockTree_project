@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}Evidence{% endblock %}
+{% block content %}
+
+<div class="hero-section">
+  <h1>
+    <span class="hero-icon">📚</span>
+    Evidence
+  </h1>
+  <p class="hero-subtitle">Every AI conclusion on this site must be traceable to a source - search the indexed document corpus or browse documented relationship evidence</p>
+</div>
+
+<section class="card">
+  <h2><span class="section-icon">🔎</span>Search Indexed Documents</h2>
+  <form method="get" class="search-box">
+    <input type="search" name="q" value="{{ query }}" placeholder="e.g. Stellantis production recall vehicle">
+    <button class="button" type="submit">Search</button>
+  </form>
+
+  {% if query %}
+    {% if results %}
+    <div class="relationship-list">
+      {% for r in results %}
+      <div class="relationship-item">
+        <div class="relationship-info">
+          <span class="relationship-name">{{ r.source or r.document_type }}</span>
+          <span class="relationship-type">{{ r.text[:260] }}{% if r.text|length > 260 %}&hellip;{% endif %}</span>
+          <span class="relationship-type muted">
+            {{ r.document_type }}{% if r.company %} &middot; {{ r.company }}{% endif %}{% if r.event_id %} &middot; event {{ r.event_id }}{% endif %}
+          </span>
+        </div>
+        <span class="badge badge-info">score {{ "%.2f"|format(r.score) }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="muted">No indexed documents matched "{{ query }}". Try a broader query, or the vector index may not be built yet.</p>
+    {% endif %}
+  {% endif %}
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2><span class="section-icon">🔗</span>Documented Relationship Evidence</h2>
+    <span class="badge badge-info">{{ relationships|length }} relationships</span>
+  </div>
+  {% if relationships %}
+  <div class="search-box">
+    <input type="text" id="evidence-filter" placeholder="Filter by company, relationship type, or source...">
+  </div>
+  <div class="table-container">
+    <table class="data-table" id="evidence-table">
+      <thead>
+        <tr><th>Entity</th><th>Relationship</th><th>Confidence</th><th>Source</th><th>Evidence Date</th><th>Last Reviewed</th><th>Scope</th><th>Evidence</th></tr>
+      </thead>
+      <tbody>
+        {% for r in relationships %}
+        <tr data-target="{{ (r.target_entity or '')|lower }}" data-type="{{ (r.relationship_type or '')|lower }}" data-source="{{ (r.source or '')|lower }}">
+          <td>{{ r.target_entity }}</td>
+          <td>{{ r.relationship_type }}</td>
+          <td><span class="badge {% if r.confidence == 'high' %}badge-success{% elif r.confidence == 'medium' %}badge-warning{% else %}badge-info{% endif %}">{{ r.confidence }}</span></td>
+          <td>{{ r.source }}</td>
+          <td>{{ r.evidence_date.strftime('%b %d, %Y') if r.evidence_date else 'Undated' }}</td>
+          <td>{{ r.last_reviewed.strftime('%b %d, %Y') if r.last_reviewed else 'Unreviewed' }}</td>
+          <td>{{ r.review_state|replace('_', ' ') }}<small class="muted">{{ r.description or '' }}</small></td>
+          <td><a href="{{ r.evidence_url }}" target="_blank" rel="noopener">view source &rarr;</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <script>
+    (function () {
+      const filterInput = document.getElementById("evidence-filter");
+      const rows = document.querySelectorAll("#evidence-table tbody tr");
+      filterInput.addEventListener("input", () => {
+        const q = filterInput.value.trim().toLowerCase();
+        rows.forEach((row) => {
+          const haystack = [row.dataset.target, row.dataset.type, row.dataset.source].join(" ");
+          row.style.display = haystack.includes(q) ? "" : "none";
+        });
+      });
+    })();
+  </script>
+  {% else %}
+  <p class="muted">No relationships documented yet.</p>
+  {% endif %}
+</section>
+
+<style>
+.hero-section { text-align: center; padding: 2rem 0 3rem; }
+.hero-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
+.hero-subtitle { font-size: 1.125rem; color: var(--text-secondary); margin: 0; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.section-icon { margin-right: 0.5rem; }
+.table-container { overflow-x: auto; }
+.relationship-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
+.relationship-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.relationship-info { display: flex; flex-direction: column; gap: 0.25rem; }
+.relationship-name { font-weight: 600; color: var(--text-primary); }
+.relationship-type { font-size: 0.875rem; color: var(--text-secondary); }
+</style>
+{% endblock %}

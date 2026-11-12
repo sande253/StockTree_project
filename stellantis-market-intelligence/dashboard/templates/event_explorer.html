@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% block title %}Event Explorer{% endblock %}
+{% block content %}
+
+<div class="hero-section">
+  <h1>
+    <span class="hero-icon">⚡</span>
+    Event Explorer
+  </h1>
+  <p class="hero-subtitle">Review detected STLA movements alongside available market and sector context.</p>
+</div>
+
+{% if events %}
+<div class="events-stats">
+  <div class="stat-mini">
+    <span class="stat-mini-value">{{ events|length }}</span>
+    <span class="stat-mini-label">Total Events</span>
+  </div>
+  <div class="stat-mini">
+    <span class="stat-mini-value">{{ events|selectattr('severity', 'equalto', 'High')|list|length }}</span>
+    <span class="stat-mini-label">High Severity</span>
+  </div>
+  <div class="stat-mini">
+    <span class="stat-mini-value">{{ (events|map(attribute='return')|select('lt', 0)|list|length / events|length * 100)|round|int }}%</span>
+    <span class="stat-mini-label">Negative Events</span>
+  </div>
+</div>
+
+<section class="card">
+  <div class="search-box">
+    <input type="search" id="event-filter" aria-label="Filter events" placeholder="Filter by date, event type, severity, or classification...">
+  </div>
+  <div class="table-container">
+    <table class="data-table events-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Movement</th>
+          <th>Market</th>
+          <th>Sector</th>
+          <th>Severity</th>
+          <th>Classification</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for e in events %}
+        <tr class="event-row {% if e.severity == 'High' %}event-high{% endif %}"
+          data-search="{{ (e.event_id ~ ' ' ~ e.event_date ~ ' ' ~ (e.event_type or '') ~ ' ' ~ e.severity ~ ' ' ~ (e.classification or ''))|lower }}">
+          <td>
+            <div class="event-date">
+              <span class="date-day">{{ e.event_date.strftime('%d') if e.event_date else '--' }}</span>
+              <span class="date-month">{{ e.event_date.strftime('%b %Y') if e.event_date else '--' }}</span>
+            </div>
+          </td>
+          <td>
+            <span class="event-type-badge">{{ e.event_type or "Unclassified" }}</span>
+          </td>
+          <td>
+            <div class="movement-indicator">
+              <span class="movement-arrow">{{ "📉" if e['return'] < 0 else "📈" }}</span>
+              <span class="{{ 'neg' if e['return'] < 0 else 'pos' }}">
+                {{ "%.2f"|format(e['return'] * 100) }}%
+              </span>
+            </div>
+          </td>
+          <td>
+            <span class="market-value">
+              {{ "%.2f"|format(e.market_return * 100) + "%" if e.market_return is not none else "-" }}
+            </span>
+          </td>
+          <td>
+            <span class="market-value">
+              {{ "%.2f"|format(e.sector_return * 100) + "%" if e.sector_return is not none else "-" }}
+            </span>
+          </td>
+          <td>
+            <span class="badge {% if e.severity == 'High' %}badge-danger{% elif e.severity == 'Medium' %}badge-warning{% else %}badge-info{% endif %}">
+              {{ e.severity }}
+            </span>
+          </td>
+          <td>
+            <span class="classification">{{ e.classification or "-" }}</span>
+          </td>
+          <td>
+            <a href="{{ url_for('dashboard.impact_analysis', event_id=e.event_id) }}" class="table-action">
+              View Impact →
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+<script>
+  (function () {
+    const filterInput = document.getElementById("event-filter");
+    const rows = document.querySelectorAll(".events-table tbody tr");
+    filterInput.addEventListener("input", () => {
+      const query = filterInput.value.trim().toLowerCase();
+      rows.forEach((row) => {
+        row.hidden = !row.dataset.search.includes(query);
+      });
+    });
+  })();
+</script>
+
+{% else %}
+<section class="card empty-state">
+  <div class="empty-icon">📊</div>
+  <h3>No Events Detected</h3>
+  <p>No significant STLA events have been detected yet. Check back after market data ingestion.</p>
+</section>
+{% endif %}
+
+<style>
+.events-stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-mini {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-mini-value {
+  font-size: 2rem;
+  font-weight: 800;
+  background: var(--gradient-3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-mini-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.events-table {
+  min-width: 1000px;
+}
+
+.event-row {
+  position: relative;
+}
+
+.event-row.event-high {
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.event-date {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.date-day {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.date-month {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.event-type-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.movement-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.movement-arrow {
+  font-size: 1.25rem;
+}
+
+.market-value {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.classification {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.table-action {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.table-action:hover {
+  color: var(--accent-blue);
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .events-stats {
+    flex-direction: column;
+  }
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% block title %}Ecosystem Graph{% endblock %}
+{% block content %}
+
+<div class="term-header">
+  <div>
+    <h1 class="term-title">STLA ECOSYSTEM MAP<span class="blink-cursor">_</span></h1>
+    <p class="term-subtitle">Evidence-backed corporate relationship network — Stellantis N.V. fixed at center, every edge traceable to a cited source.</p>
+  </div>
+  <div class="term-stats">
+    <div class="term-stat"><span class="term-stat-val">{{ network.nodes|length }}</span><span class="term-stat-lbl">NODES</span></div>
+    <div class="term-stat"><span class="term-stat-val">{{ network.edges|length }}</span><span class="term-stat-lbl">EDGES</span></div>
+    <div class="term-stat"><span class="term-stat-val">{{ relationship_types|length }}</span><span class="term-stat-lbl">TYPES</span></div>
+  </div>
+</div>
+
+<div class="terminal-grid">
+  <aside class="terminal-col terminal-col-side">
+    <div class="terminal-panel">
+      <div class="panel-head"><span>SEARCH</span></div>
+      <div class="panel-body">
+        <input id="node-search" type="text" placeholder="Find entity by name..." class="term-input" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="terminal-panel">
+      <div class="panel-head"><span>RELATIONSHIP TYPES</span><span class="panel-tag">{{ relationship_types|length }}</span></div>
+      <div class="panel-body filter-list" id="type-filters">
+        {% if relationship_types %}
+          {% for rt in relationship_types %}
+          <label class="term-filter-row">
+            <input type="checkbox" value="{{ rt }}" class="rt-filter" checked>
+            <span class="type-dot" data-type="{{ rt }}"></span>
+            <span class="term-filter-label">{{ rt.replace('_', ' ') }}</span>
+            <span class="term-filter-count">{{ network.edges | selectattr('relationship_type', 'equalto', rt) | list | length }}</span>
+          </label>
+          {% endfor %}
+        {% else %}
+          <span class="muted">No relationship types available</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="terminal-panel">
+      <div class="panel-head"><span>CONTROLS</span></div>
+      <div class="panel-body" style="display:flex; flex-direction:column; gap:0.5rem;">
+        <button id="reset-view" type="button" class="button" style="justify-content:center;">RESET VIEW</button>
+        <p class="muted" style="font-size:0.78rem; margin-top:0.25rem;">
+          Drag nodes to reposition &middot; scroll / pinch to zoom &middot; STLA stays pinned at center.
+        </p>
+      </div>
+    </div>
+  </aside>
+
+  <section class="terminal-col terminal-col-center">
+    <div class="terminal-panel graph-stage-panel">
+      <div class="panel-head">
+        <span>DOCUMENTED RELATIONSHIP MAP</span>
+        <span class="panel-tag">EVIDENCE-LINKED</span>
+      </div>
+      <div class="panel-body graph-stage-body">
+        <svg id="ecosystem-graph"></svg>
+        <div id="graph-tooltip" class="graph-tooltip" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="terminal-col terminal-col-side">
+    <div class="terminal-panel">
+      <div class="panel-head"><span>INSPECTOR</span><span class="panel-tag" id="inspector-tag">STLA</span></div>
+      <div class="panel-body" id="inspector-body">
+        <p class="muted">Click a node or an edge in the graph to inspect the underlying evidence.</p>
+      </div>
+    </div>
+
+    <div class="terminal-panel">
+      <div class="panel-head"><span>LEGEND</span></div>
+      <div class="panel-body" id="legend-body" style="display:flex; flex-direction:column; gap:0.5rem;">
+        <div class="term-filter-row" style="cursor:default;">
+          <span class="type-dot" data-center="1"></span>
+          <span class="term-filter-label">Stellantis N.V. (center)</span>
+        </div>
+        {% for rt in relationship_types %}
+        <div class="term-filter-row" style="cursor:default;">
+          <span class="type-dot" data-type="{{ rt }}"></span>
+          <span class="term-filter-label">{{ rt.replace('_', ' ') }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </aside>
+</div>
+
+<style>
+.blink-cursor {
+  color: var(--accent-amber);
+  animation: blink-live 1s steps(1) infinite;
+}
+
+.term-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.term-title {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.35rem 0;
+  background: none;
+  -webkit-text-fill-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.term-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  max-width: 640px;
+  margin: 0;
+}
+
+.term-stats {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.term-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: var(--mono);
+}
+
+.term-stat-val {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent-amber);
+}
+
+.term-stat-lbl {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+.terminal-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr 280px;
+  gap: 1rem;
+  align-items: start;
+}
+
+.terminal-col-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.graph-stage-panel {
+  display: flex;
+  flex-direction: column;
+  height: 78vh;
+  min-height: 560px;
+}
+
+.graph-stage-body {
+  flex: 1;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+
+.term-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-primary);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.term-input:focus {
+  outline: none;
+  border-color: var(--accent-amber);
+  box-shadow: 0 0 0 3px rgba(255, 176, 0, 0.18);
+}
+
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.term-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.3rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+
+.term-filter-row:hover {
+  background: var(--bg-hover);
+}
+
+.term-filter-label {
+  flex: 1;
+  color: var(--text-primary);
+  text-transform: capitalize;
+}
+
+.term-filter-count {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-family: var(--mono);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.7rem;
+}
+
+.type-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  box-shadow: 0 0 6px currentColor;
+}
+
+@media (max-width: 1200px) {
+  .terminal-grid {
+    grid-template-columns: 1fr;
+  }
+  .graph-stage-panel {
+    height: 70vh;
+  }
+}
+</style>
+
+<script>
+  const NETWORK = {{ network | tojson }};
+  const RELATIONSHIP_TYPES = {{ relationship_types | tojson }};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="{{ url_for('dashboard.static', filename='graph.js') }}"></script>
+{% endblock %}

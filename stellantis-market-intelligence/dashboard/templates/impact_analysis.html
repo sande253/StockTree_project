@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+{% block title %}Impact Analysis{% endblock %}
+{% block content %}
+
+<div class="hero-section">
+  <h1>
+    <span class="hero-icon">🎯</span>
+    Impact Analysis
+  </h1>
+  <p class="hero-subtitle">Every documented company potentially affected by one STLA event, ranked by ecosystem exposure</p>
+</div>
+
+<section class="card">
+  <div class="card-header">
+    <h2><span class="section-icon">📅</span>Event</h2>
+    <span class="badge {% if event['return'] < 0 %}badge-danger{% else %}badge-success{% endif %}">
+      {{ event.get('severity', 'Significant') }}
+    </span>
+  </div>
+  <dl class="kv">
+    <dt>Event ID</dt><dd>{{ event.event_id }}</dd>
+    <dt>Date</dt><dd>{{ event.event_date.strftime('%B %d, %Y') if event.event_date else event.event_date }}</dd>
+    <dt>Type</dt><dd>{{ event.event_type or "Unclassified" }}</dd>
+    <dt>STLA movement</dt><dd class="{{ 'neg' if event['return'] < 0 else 'pos' }}">{{ "%.2f"|format(event['return'] * 100) }}%</dd>
+    <dt>Market movement</dt><dd>{{ "%.2f"|format(event.market_return * 100) + "%" if event.market_return is not none else "N/A" }}</dd>
+    <dt>Sector movement</dt><dd>{{ "%.2f"|format(event.sector_return * 100) + "%" if event.sector_return is not none else "N/A" }}</dd>
+  </dl>
+</section>
+
+{% if price_history %}
+<section class="card chart-card">
+  <h2><span class="section-icon">📉</span>STLA Price Around This Event (&plusmn;15 calendar days)</h2>
+  <div class="chart-container">
+    <canvas id="event-window-chart" role="img" aria-label="STLA closing prices around the selected event"></canvas>
+  </div>
+  <script>
+    (function () {
+      const points = {{ price_history|tojson }};
+      const eventDate = {{ (event.event_date.strftime('%Y-%m-%d') if event.event_date else "")|tojson }};
+      function renderChart() {
+        const canvas = document.getElementById("event-window-chart");
+        if (!window.Chart) {
+          const fallback = document.createElement("p");
+          fallback.className = "chart-fallback muted";
+          fallback.textContent = points.length
+            ? `Chart unavailable. Stored closes span ${points[0].date} to ${points[points.length - 1].date}; event date ${eventDate}.`
+            : "Chart unavailable. Price data is unavailable.";
+          canvas.replaceWith(fallback);
+          return;
+        }
+        new window.Chart(canvas, {
+          type: "line",
+          data: {
+            labels: points.map((p) => p.date),
+            datasets: [{
+              label: "STLA close",
+              data: points.map((p) => p.close),
+              borderColor: "#176b5b",
+              backgroundColor: "rgba(23, 107, 91, 0.10)",
+              fill: true,
+              tension: 0.25,
+              pointRadius: (ctx) => (points[ctx.dataIndex] && points[ctx.dataIndex].date === eventDate ? 5 : 0),
+              pointBackgroundColor: "#b74c3b",
+              borderWidth: 2,
+            }],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { ticks: { color: "#5c6d64", maxTicksLimit: 10 }, grid: { color: "#d5e0d9" } },
+              y: { ticks: { color: "#5c6d64" }, grid: { color: "#d5e0d9" } },
+            },
+          },
+        });
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderChart, { once: true });
+      } else {
+        renderChart();
+      }
+    })();
+  </script>
+</section>
+{% endif %}
+
+<section aria-labelledby="timeline-title">
+  <h2 id="timeline-title">Investigation Timeline</h2>
+  <p class="muted">{{ timeline.interpretation }}</p>
+  <h3>Linked Publications</h3>
+  {% for publication in timeline.publications %}
+  <article class="relationship-item">
+    <strong>{{ publication.published_at }} &middot; {{ publication.source }}</strong>
+    <p><a href="{{ publication.url }}" target="_blank" rel="noopener noreferrer">{{ publication.title }}</a></p>
+    <p class="muted">{{ publication.match_reason }}. {{ publication.days_before_event|abs }} calendar days {{ 'before' if publication.days_before_event >= 0 else 'after' }} event. Rank {{ publication.relevance_rank }}.</p>
+  </article>
+  {% else %}<p class="muted">No linked publication supports a catalyst conclusion for this event.</p>{% endfor %}
+  <details>
+    <summary>Prices, Benchmarks and Peer Returns</summary>
+    <div class="table-container"><table class="data-table">
+      <thead><tr><th>Date</th><th>Ticker</th><th>Close</th><th>Adjusted Daily Return</th></tr></thead>
+      <tbody>{% for point in timeline.prices %}<tr><td>{{ point.date }}</td><td>{{ point.ticker }}</td><td>{{ '%.2f'|format(point.close) }}</td><td>{{ ('%.2f'|format(point.daily_return * 100) ~ '%') if point.daily_return is not none else 'No prior close' }}</td></tr>{% endfor %}</tbody>
+    </table></div>
+  </details>
+  <details>
+    <summary>Event-Study Coverage</summary>
+    <div class="table-container"><table class="data-table">
+      <thead><tr><th>Ticker</th><th>Observed Windows</th><th>Status</th><th>Missing Offsets</th></tr></thead>
+      <tbody>{% for window in timeline.windows %}<tr><td>{{ window.ticker }}</td><td>{{ window.observed }}/{{ window.expected }}</td><td>{{ window.status|replace('_', ' ') }}</td><td>{{ window.missing_offsets|join(', ') or 'None' }}</td></tr>{% endfor %}</tbody>
+    </table></div>
+  </details>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2><span class="section-icon">🏢</span>Potentially Affected Companies</h2>
+    <span class="badge badge-info">{{ impact|length }} companies</span>
+  </div>
+
+  {% if impact %}
+  <div class="search-box">
+    <input type="text" id="impact-filter" placeholder="Filter by company, ticker, or relationship type...">
+  </div>
+  <div class="table-container">
+    <table class="data-table" id="impact-table">
+      <thead>
+        <tr>
+          <th class="sortable" data-key="name">Company</th>
+          <th class="sortable" data-key="ticker">Ticker</th>
+          <th class="sortable" data-key="relationship_type">Relationship</th>
+          <th class="sortable" data-key="relationship_strength">Strength</th>
+          <th class="sortable" data-key="historical_correlation">Correlation</th>
+          <th class="sortable" data-key="historical_event_sensitivity">Sensitivity</th>
+          <th class="sortable" data-key="current_event_reaction">Current reaction</th>
+          <th class="sortable" data-key="ecosystem_exposure_score">Exposure</th>
+          <th>Evidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in impact %}
+        <tr
+          data-name="{{ c.name|lower }}"
+          data-ticker="{{ (c.ticker or '')|lower }}"
+          data-relationship_type="{{ (c.relationship_type or '')|lower }}"
+          data-relationship_strength="{{ c.relationship_strength or '' }}"
+          data-historical_correlation="{{ c.historical_correlation if c.historical_correlation is number else '' }}"
+          data-historical_event_sensitivity="{{ c.historical_event_sensitivity or '' }}"
+          data-current_event_reaction="{{ c.current_event_reaction if c.current_event_reaction is number else '' }}"
+          data-ecosystem_exposure_score="{{ c.ecosystem_exposure_score or 0 }}"
+        >
+          <td>{{ c.name }}</td>
+          <td>{{ c.ticker or "-" }}</td>
+          <td>{{ c.relationship_type }}</td>
+          <td><span class="badge badge-info">{{ c.relationship_strength }}</span></td>
+          <td>{{ c.historical_correlation if c.historical_correlation is string else "%.2f"|format(c.historical_correlation) }}</td>
+          <td>{{ c.historical_event_sensitivity }}</td>
+          <td class="{{ 'neg' if c.current_event_reaction is number and c.current_event_reaction < 0 else ('pos' if c.current_event_reaction is number else '') }}">
+            {{ c.current_event_reaction if c.current_event_reaction is string else "%.2f"|format(c.current_event_reaction * 100) + "%" }}
+          </td>
+          <td><strong>{{ c.ecosystem_exposure_score }}</strong>/100</td>
+          <td><a href="{{ c.evidence_url }}" target="_blank" rel="noopener">source</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <script>
+    (function () {
+      const table = document.getElementById("impact-table");
+      const tbody = table.querySelector("tbody");
+      const filterInput = document.getElementById("impact-filter");
+      const headers = table.querySelectorAll("th.sortable");
+
+      filterInput.addEventListener("input", () => {
+        const q = filterInput.value.trim().toLowerCase();
+        tbody.querySelectorAll("tr").forEach((row) => {
+          const haystack = [row.dataset.name, row.dataset.ticker, row.dataset.relationship_type].join(" ");
+          row.style.display = haystack.includes(q) ? "" : "none";
+        });
+      });
+
+      headers.forEach((th) => {
+        th.addEventListener("click", () => {
+          const key = th.dataset.key;
+          const asc = !th.classList.contains("sort-asc");
+          headers.forEach((h) => h.classList.remove("sort-asc", "sort-desc"));
+          th.classList.add(asc ? "sort-asc" : "sort-desc");
+
+          const rows = Array.from(tbody.querySelectorAll("tr"));
+          rows.sort((a, b) => {
+            const va = a.dataset[key] ?? "";
+            const vb = b.dataset[key] ?? "";
+            const na = parseFloat(va);
+            const nb = parseFloat(vb);
+            const bothNumeric = !isNaN(na) && !isNaN(nb) && va !== "" && vb !== "";
+            const cmp = bothNumeric ? na - nb : va.localeCompare(vb);
+            return asc ? cmp : -cmp;
+          });
+          rows.forEach((row) => tbody.appendChild(row));
+        });
+      });
+    })();
+  </script>
+  {% else %}
+  <p class="muted">No companies with a documented relationship to Stellantis were found. Data unavailable.</p>
+  {% endif %}
+</section>
+
+<style>
+.hero-section {
+  text-align: center;
+  padding: 2rem 0 3rem;
+}
+
+.hero-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-icon {
+  margin-right: 0.5rem;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+</style>
+
+{% endblock %}

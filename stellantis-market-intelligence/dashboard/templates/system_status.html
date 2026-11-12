@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block title %}System Status{% endblock %}
+{% block content %}
+
+<div class="hero-section">
+  <h1>
+    <span class="hero-icon">🩺</span>
+    System Status
+  </h1>
+  <p class="hero-subtitle">Current application health and locally stored data availability.</p>
+</div>
+
+<section class="card">
+  <div class="card-header">
+    <h2><span class="section-icon">⚙️</span>Overall Status</h2>
+    <span class="badge {% if status == 'healthy' %}badge-success{% elif status == 'degraded' %}badge-warning{% else %}badge-danger{% endif %}">
+      {{ status.upper() }}
+    </span>
+  </div>
+  <p class="muted">Last updated: {{ timestamp }}</p>
+</section>
+
+<section class="card">
+  <h2><span class="section-icon">🧩</span>Components</h2>
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Status</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for name, component in components.items() %}
+        <tr>
+          <td><strong>{{ name|title }}</strong></td>
+          <td>
+            <span class="badge {% if component.status == 'healthy' %}badge-success{% elif component.status in ('degraded', 'not_initialized') %}badge-warning{% else %}badge-danger{% endif %}">
+              {{ component.status|title }}
+            </span>
+          </td>
+          <td>
+            {% if component.get('type') %}
+              <span class="muted">{{ component.type }}</span>
+            {% endif %}
+            {% if component.get('error') %}
+              <br><small class="neg">{{ component.error }}</small>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="grid-2-col">
+  <section class="card">
+    <h2><span class="section-icon">💾</span>Data Status</h2>
+    <dl class="kv">
+      <dt>Companies in universe</dt>
+      <dd>{{ data_stats.companies }}</dd>
+      <dt>Price data points</dt>
+      <dd>{{ data_stats.price_points }}</dd>
+      <dt>Detected events</dt>
+      <dd>{{ data_stats.events }}</dd>
+      <dt>Documented relationships</dt>
+      <dd>{{ data_stats.relationships }}</dd>
+      <dt>Vector index documents</dt>
+      <dd>{{ data_stats.vector_docs }}</dd>
+    </dl>
+  </section>
+
+  <section class="card">
+    <h2><span class="section-icon">🖥️</span>System Resources</h2>
+    <dl class="kv">
+      <dt>Disk usage</dt>
+      <dd>{{ resources.disk_usage }}</dd>
+      <dt>Database size</dt>
+      <dd>{{ resources.db_size }}</dd>
+      <dt>Log directory size</dt>
+      <dd>{{ resources.log_size }}</dd>
+    </dl>
+  </section>
+</div>
+
+<section aria-labelledby="maintenance-title">
+  <h2 id="maintenance-title">Maintenance</h2>
+  <p id="maintenance-state" role="status">Loading job status...</p>
+  <p id="maintenance-schedule" class="muted"></p>
+  <p id="pipeline-state" class="muted"></p>
+  <div class="maintenance-actions">
+    <button class="button" type="button" data-job="refresh">Refresh Data</button>
+    <button class="button" type="button" data-job="backup">Create Backup</button>
+  </div>
+  <p id="maintenance-error" class="neg" role="alert"></p>
+  <div class="table-container"><table class="data-table">
+    <thead><tr><th>Job</th><th>Status</th><th>Started</th><th>Finished</th></tr></thead>
+    <tbody id="maintenance-history"></tbody>
+  </table></div>
+  <h3>Feed Outcomes</h3>
+  <div class="table-container"><table class="data-table">
+    <thead><tr><th>Source</th><th>Status</th><th>Articles</th><th>Latest Publication</th></tr></thead>
+    <tbody id="feed-outcomes"></tbody>
+  </table></div>
+</section>
+
+<section aria-labelledby="quality-title">
+  <h2 id="quality-title">Ticker Coverage</h2>
+  {% for issue in quality.get('issues', []) %}<p class="neg">{{ issue }}</p>{% endfor %}
+  {% for warning in quality.get('warnings', []) %}<p class="muted">{{ warning }}</p>{% endfor %}
+  <div class="table-container"><table class="data-table">
+    <thead><tr><th>Ticker</th><th>Status</th><th>Daily Prices</th><th>Latest Price</th><th>Latest Features</th><th>Missing Features</th><th>Reference-Session Gaps</th></tr></thead>
+    <tbody>{% for row in quality.get('coverage', []) %}<tr>
+      <td>{{ row.ticker }}</td><td>{{ row.status }}</td><td>{{ row.price_rows }}</td><td>{{ row.latest_price or 'Not ingested' }}</td>
+      <td>{{ row.latest_feature or 'Not computed' }}</td><td>{{ row.missing_features }}</td>
+      <td>{% if row.reference_ticker %}<details><summary>{{ row.reference_session_gaps|length }} vs {{ row.reference_ticker }}</summary>{{ row.reference_session_gaps|join(', ') or 'None' }}</details>{% else %}No comparable reference{% endif %}</td>
+    </tr>{% endfor %}</tbody>
+  </table></div>
+</section>
+
+<script>
+(() => {
+  const buttons = [...document.querySelectorAll('[data-job]')];
+  const state = document.getElementById('maintenance-state');
+  const error = document.getElementById('maintenance-error');
+  let timer;
+  function rows(target, records, keys) {
+    target.replaceChildren();
+    records.forEach(record => {
+      const row = document.createElement('tr');
+      keys.forEach(key => { const cell = document.createElement('td'); cell.textContent = record[key] ?? '-'; row.append(cell); });
+      target.append(row);
+    });
+  }
+  async function load() {
+    clearTimeout(timer);
+    try {
+      const response = await fetch('/api/maintenance');
+      if (!response.ok) throw new Error('Job status unavailable. Check your session.');
+      const payload = await response.json();
+      const job = payload.current;
+      const busy = ['queued', 'running'].includes(job.status);
+      buttons.forEach(button => button.disabled = busy);
+      state.textContent = `${job.kind || 'Maintenance'}: ${job.status}${job.finished_at ? ' | Finished: ' + job.finished_at : ''}`;
+      document.getElementById('maintenance-schedule').textContent = job.scheduler_enabled ? `Next scheduled refresh: ${job.next_run}` : 'Automatic schedule is disabled.';
+      document.getElementById('pipeline-state').textContent = `Latest pipeline: ${payload.pipeline.status || 'Not run'} | ${payload.pipeline.finished_at || payload.pipeline.started_at || '-'}`;
+      rows(document.getElementById('maintenance-history'), payload.history, ['kind', 'status', 'started_at', 'finished_at']);
+      rows(document.getElementById('feed-outcomes'), payload.sources, ['name', 'status', 'articles', 'latest_publication']);
+      if (busy) timer = setTimeout(load, 3000);
+    } catch (failure) { error.textContent = failure.message; }
+  }
+  buttons.forEach(button => button.addEventListener('click', async () => {
+    buttons.forEach(item => item.disabled = true);
+    error.textContent = '';
+    try {
+      const response = await fetch(`/api/maintenance/${button.dataset.job}`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRFToken': document.querySelector('meta[name="csrf-token"]').content }, body: '{}',
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || 'Job could not be started.');
+    } catch (failure) { error.textContent = failure.message; }
+    await load();
+  }));
+  load();
+})();
+</script>
+
+<style>
+.maintenance-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.hero-section { text-align: center; padding: 2rem 0 3rem; }
+.hero-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
+.hero-subtitle { font-size: 1.125rem; color: var(--text-secondary); margin: 0; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.section-icon { margin-right: 0.5rem; }
+.table-container { overflow-x: auto; }
+.grid-2-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1rem; }
+</style>
+{% endblock %}
+

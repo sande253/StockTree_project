@@ -1,0 +1,371 @@
+{% extends "base.html" %}
+{% block title %}Executive Overview{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<div class="hero-section">
+  <h1>
+    <span class="hero-icon">📊</span>
+    Executive Overview
+  </h1>
+  <p class="hero-subtitle">Detected market moves, benchmark context, documented relationships, and historical observations.</p>
+</div>
+
+<!-- Key Metrics -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon">🏢</div>
+    <div class="stat-value">{{ num_affected }}</div>
+    <div class="stat-label">Documented Entities</div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-icon">⚡</div>
+    <div class="stat-value">{% if latest_event %}{{ "%.1f"|format(latest_event['return'] * 100) }}%{% else %}--{% endif %}</div>
+    <div class="stat-label">Latest STLA Movement</div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-icon">🔗</div>
+    <div class="stat-value">{{ top_relationships|length }}</div>
+    <div class="stat-label">Top Relationships</div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-icon">🎯</div>
+    <div class="stat-value">{{ top_sensitivities|length }}</div>
+    <div class="stat-label">Ranked Sensitivities</div>
+  </div>
+</div>
+
+<!-- STLA Price Trend -->
+<section class="card chart-card">
+  <h2>
+    <span class="section-icon">📉</span>
+    STLA Price Trend (last {{ price_history|length }} trading days)
+  </h2>
+  {% if price_history %}
+  <div class="chart-container">
+    <canvas id="price-trend-chart" role="img" aria-label="STLA closing price history"></canvas>
+  </div>
+  <script>
+    (function () {
+      const points = {{ price_history|tojson }};
+        function renderChart() {
+          const canvas = document.getElementById("price-trend-chart");
+          if (!window.Chart) {
+            const fallback = document.createElement("p");
+            fallback.className = "chart-fallback muted";
+            fallback.textContent = points.length
+              ? `Chart unavailable. Stored closes: ${points[0].date} $${points[0].close.toFixed(2)} to ${points[points.length - 1].date} $${points[points.length - 1].close.toFixed(2)}.`
+              : "Chart unavailable. Price data is unavailable.";
+            canvas.replaceWith(fallback);
+            return;
+          }
+          new window.Chart(canvas, {
+            type: "line",
+            data: {
+              labels: points.map((p) => p.date),
+              datasets: [{
+                label: "STLA close",
+                data: points.map((p) => p.close),
+                borderColor: "#176b5b",
+                backgroundColor: "rgba(23, 107, 91, 0.10)",
+                fill: true,
+                tension: 0.25,
+                pointRadius: 0,
+                borderWidth: 2,
+              }],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { display: false } },
+              scales: {
+                x: { ticks: { color: "#5c6d64", maxTicksLimit: 10 }, grid: { color: "#d5e0d9" } },
+                y: { ticks: { color: "#5c6d64" }, grid: { color: "#d5e0d9" } },
+              },
+            },
+          });
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", renderChart, { once: true });
+        } else {
+          renderChart();
+        }
+    })();
+  </script>
+  {% else %}
+  <p class="muted">No price history available yet.</p>
+  {% endif %}
+</section>
+
+{% if latest_event %}
+<!-- Latest Event Card -->
+<section class="card event-highlight">
+  <div class="card-header">
+    <h2>
+      <span class="section-icon">🚨</span>
+      Latest Significant STLA Event
+    </h2>
+    <span class="badge {% if latest_event['return'] < 0 %}badge-danger{% else %}badge-success{% endif %}">
+      {{ latest_event.get('severity', 'Significant') }}
+    </span>
+  </div>
+  
+  <div class="event-details">
+    <div class="detail-grid">
+      <div class="detail-item">
+        <span class="detail-label">Date</span>
+        <span class="detail-value">{{ latest_event.event_date.strftime('%B %d, %Y') if latest_event.event_date else latest_event.event_date }}</span>
+      </div>
+      
+      <div class="detail-item">
+        <span class="detail-label">Event Type</span>
+        <span class="detail-value">{{ latest_event.event_type or "Unclassified" }}</span>
+      </div>
+      
+      <div class="detail-item">
+        <span class="detail-label">STLA Movement</span>
+        <span class="detail-value {% if latest_event['return'] < 0 %}neg{% else %}pos{% endif %}">
+          {{ "%.2f"|format(latest_event['return'] * 100) }}%
+        </span>
+      </div>
+      
+      <div class="detail-item">
+        <span class="detail-label">Market Movement</span>
+        <span class="detail-value">
+          {{ "%.2f"|format(latest_event.market_return * 100) + "%" if latest_event.market_return is not none else "N/A" }}
+        </span>
+      </div>
+      
+      <div class="detail-item">
+        <span class="detail-label">Sector Movement</span>
+        <span class="detail-value">
+          {{ "%.2f"|format(latest_event.sector_return * 100) + "%" if latest_event.sector_return is not none else "N/A" }}
+        </span>
+      </div>
+      
+      <div class="detail-item">
+        <span class="detail-label">Classification</span>
+        <span class="detail-value">{{ latest_event.classification or "Analysis pending" }}</span>
+      </div>
+    </div>
+    
+    <div class="card-actions">
+      <a class="button" href="{{ url_for('dashboard.impact_analysis', event_id=latest_event.event_id) }}">
+        View Full Impact Analysis →
+      </a>
+    </div>
+  </div>
+</section>
+{% else %}
+<section class="card empty-state">
+  <div class="empty-icon">📊</div>
+  <h3>No Recent Events</h3>
+  <p>No significant STLA events detected yet. Market data analysis in progress.</p>
+</section>
+{% endif %}
+
+<!-- Ecosystem Summary -->
+<div class="grid-2-col">
+  <section class="card">
+    <h2>
+      <span class="section-icon">🔗</span>
+      Top Documented Relationships
+    </h2>
+    
+    {% if top_relationships %}
+    <div class="relationship-list">
+      {% for r in top_relationships %}
+      <div class="relationship-item">
+        <div class="relationship-info">
+          <span class="relationship-name">{{ r.name }}</span>
+          <span class="relationship-type">{{ r.relationship_type }}</span>
+        </div>
+        <span class="badge badge-info">{{ r.relationship_strength }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="muted">No relationships documented yet.</p>
+    {% endif %}
+    
+    <div class="card-actions">
+      <a class="button" href="{{ url_for('dashboard.ecosystem_graph') }}">View Full Ecosystem →</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>
+      <span class="section-icon">📈</span>
+      Historical Sensitivities
+    </h2>
+    <p class="muted" style="margin-bottom: 1rem;">Companies most reactive to STLA events</p>
+    
+    {% if top_sensitivities %}
+    <div class="sensitivity-list">
+      {% for c in top_sensitivities %}
+      <div class="sensitivity-item">
+        <div class="sensitivity-info">
+          <span class="sensitivity-name">{{ c.name }}</span>
+          <span class="sensitivity-label badge badge-danger">{{ c.historical_event_sensitivity }} Sensitivity</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="muted">Historical sensitivity data pending analysis.</p>
+    {% endif %}
+  </section>
+</div>
+
+<style>
+.hero-section {
+  text-align: center;
+  padding: 2rem 0 3rem;
+}
+
+.hero-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.stat-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-icon {
+  margin-right: 0.5rem;
+}
+
+.event-highlight {
+  background: linear-gradient(135deg, rgba(255, 176, 0, 0.06) 0%, rgba(255, 123, 0, 0.05) 100%);
+  border-color: rgba(255, 176, 0, 0.3);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detail-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.detail-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.card-actions {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.grid-2-col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+.relationship-list, .sensitivity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.relationship-item, .sensitivity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.relationship-item:hover, .sensitivity-item:hover {
+  background: var(--bg-hover);
+  transform: translateX(4px);
+}
+
+.relationship-info, .sensitivity-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.relationship-name, .sensitivity-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.relationship-type {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .grid-2-col {
+    grid-template-columns: 1fr;
+  }
+  
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+{% endblock %}

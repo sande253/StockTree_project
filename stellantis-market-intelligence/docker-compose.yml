@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stellantis-intelligence
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      - DUCKDB_PATH=/app/data/warehouse/market.duckdb
+      - LOG_LEVEL=INFO
+      - GROQ_API_KEY=${GROQ_API_KEY:-}
+      - GROQ_MODEL=${GROQ_MODEL:-openai/gpt-oss-20b}
+      - FLASK_ENV=production
+      - SECRET_KEY=${SECRET_KEY:?Run python -m scripts.configure_security first}
+      - AUTH_PASSWORD_HASH=${AUTH_PASSWORD_HASH:?Run python -m scripts.configure_security first}
+      - AUTH_USERNAME=${AUTH_USERNAME:-admin}
+      - ENABLE_SCHEDULER=${ENABLE_SCHEDULER:-true}
+      - REFRESH_UTC_HOUR=${REFRESH_UTC_HOUR:-6}
+      - REFRESH_UTC_MINUTE=${REFRESH_UTC_MINUTE:-0}
+      - TRUST_PROXY=${TRUST_PROXY:-false}
+      - ALERT_WEBHOOK_URL=${ALERT_WEBHOOK_URL:-}
+      - NEWS_USER_AGENT=${NEWS_USER_AGENT:-stellantis-market-intelligence research-prototype}
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - stellantis-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  stellantis-network:
+    driver: bridge

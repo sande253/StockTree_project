@@ -1,0 +1,233 @@
+2026-10-29 11:51:10 - ingestion.pipeline - ERROR - run_pipeline:150 - Pipeline failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 76, in run_pipeline
+    conn = get_connection(warehouse)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 43, in fail_connection
+    raise OSError("database is locked")
+OSError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 79, in run_pipeline
+    raise RuntimeError(
+RuntimeError: Cannot open the warehouse for refresh. Stop the application first if it holds a DuckDB lock, then retry.
+2026-10-29 11:51:11 - ingestion.pipeline - ERROR - stage:66 - Stage prices:STLA failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 61, in stage
+    result = action()
+             ^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 110, in <lambda>
+    stage(f"prices:{ticker}", lambda ticker=ticker, start=start: ingest_price_history(
+                                                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 63, in action
+    raise RuntimeError("provider unavailable")
+RuntimeError: provider unavailable
+2026-10-29 11:51:33 - api.main - ERROR - handle_unexpected_error:154 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\internals\blocks.py", line 1907, in fillna
+    new_values = self.values.fillna(value=value, limit=limit, copy=copy)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\arrays\masked.py", line 326, in fillna
+    new_values[mask] = value
+    ~~~~~~~~~~^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\arrays\masked.py", line 377, in __setitem__
+    value = self._validate_setitem_value(value)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\arrays\masked.py", line 363, in _validate_setitem_value
+    raise TypeError(f"Invalid value '{value!s}' for dtype '{self.dtype}'")
+TypeError: Invalid value '1.736842105263158' for dtype 'Int32'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\api\routes\reports.py", line 18, in get_event_report
+    report = generate_event_report(event_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\reports\generator.py", line 36, in generate_event_report
+    similar_events = find_similar_events(event_id, top_n=3)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\events\similarity.py", line 92, in find_similar_events
+    matrix = build_feature_matrix(events)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\events\similarity.py", line 56, in build_feature_matrix
+    numeric = numeric.fillna(numeric.mean()).fillna(0.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\generic.py", line 7103, in fillna
+    res_k = result[k].fillna(v, limit=limit)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\generic.py", line 7074, in fillna
+    new_data = self._mgr.fillna(value=value, limit=limit, inplace=inplace)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\internals\managers.py", line 461, in fillna
+    return self.apply(
+           ^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\internals\managers.py", line 445, in apply
+    applied = getattr(b, f)(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\internals\blocks.py", line 1911, in fillna
+    new_values = self.values.fillna(value=value, limit=limit)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\arrays\masked.py", line 326, in fillna
+    new_values[mask] = value
+    ~~~~~~~~~~^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\arrays\masked.py", line 377, in __setitem__
+    value = self._validate_setitem_value(value)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\pandas\core\arrays\masked.py", line 363, in _validate_setitem_value
+    raise TypeError(f"Invalid value '{value!s}' for dtype '{self.dtype}'")
+TypeError: Invalid value '1.736842105263158' for dtype 'Int32'
+2026-10-29 11:52:21 - api.main - ERROR - handle_unexpected_error:154 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\api\routes\reports.py", line 18, in get_event_report
+    report = generate_event_report(event_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\reports\generator.py", line 85, in generate_event_report
+    "historical_precedent": [
+                            ^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\reports\generator.py", line 87, in <listcomp>
+    "event_date": e["event_date"],
+                  ~^^^^^^^^^^^^^^
+KeyError: 'event_date'
+2026-10-29 11:52:21 - api.main - ERROR - handle_unexpected_error:154 - Unhandled error in request
+Traceback (most recent call last):
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\STLA_StockTreeProject\stellantis-market-intelligence\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\api\routes\reports.py", line 18, in get_event_report
+    report = generate_event_report(event_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\reports\generator.py", line 85, in generate_event_report
+    "historical_precedent": [
+                            ^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\reports\generator.py", line 87, in <listcomp>
+    "event_date": e["event_date"],
+                  ~^^^^^^^^^^^^^^
+KeyError: 'event_date'
+2026-10-29 11:52:56 - ingestion.pipeline - ERROR - run_pipeline:150 - Pipeline failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 76, in run_pipeline
+    conn = get_connection(warehouse)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 43, in fail_connection
+    raise OSError("database is locked")
+OSError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 79, in run_pipeline
+    raise RuntimeError(
+RuntimeError: Cannot open the warehouse for refresh. Stop the application first if it holds a DuckDB lock, then retry.
+2026-10-29 11:52:56 - ingestion.pipeline - ERROR - stage:66 - Stage prices:STLA failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 61, in stage
+    result = action()
+             ^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 110, in <lambda>
+    stage(f"prices:{ticker}", lambda ticker=ticker, start=start: ingest_price_history(
+                                                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 63, in action
+    raise RuntimeError("provider unavailable")
+RuntimeError: provider unavailable
+2026-10-29 11:58:09 - ingestion.pipeline - ERROR - run_pipeline:150 - Pipeline failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 76, in run_pipeline
+    conn = get_connection(warehouse)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 43, in fail_connection
+    raise OSError("database is locked")
+OSError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 79, in run_pipeline
+    raise RuntimeError(
+RuntimeError: Cannot open the warehouse for refresh. Stop the application first if it holds a DuckDB lock, then retry.
+2026-10-29 11:58:10 - ingestion.pipeline - ERROR - stage:66 - Stage prices:STLA failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 61, in stage
+    result = action()
+             ^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 110, in <lambda>
+    stage(f"prices:{ticker}", lambda ticker=ticker, start=start: ingest_price_history(
+                                                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 63, in action
+    raise RuntimeError("provider unavailable")
+RuntimeError: provider unavailable
+2026-10-29 12:24:24 - api.maintenance - ERROR - send_failure_alert:37 - Maintenance alert: {'job_id': '927d1bcaadd14035a59e2e6831ecc0e6', 'kind': 'refresh', 'status': 'degraded', 'timestamp': '2026-10-29T06:54:24.951794+00:00'}
+2026-10-29 12:26:16 - api.maintenance - ERROR - send_failure_alert:37 - Maintenance alert: {'job_id': 'ef6a8d14cd214ff09db8e3f3656cce24', 'kind': 'refresh', 'status': 'degraded', 'timestamp': '2026-10-29T06:56:16.156365+00:00'}
+2026-10-29 12:26:16 - ingestion.pipeline - ERROR - run_pipeline:163 - Pipeline failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 78, in run_pipeline
+    conn = get_connection(warehouse)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 46, in fail_connection
+    raise OSError("database is locked")
+OSError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 81, in run_pipeline
+    raise RuntimeError(
+RuntimeError: Cannot open the warehouse for refresh. Stop the application first if it holds a DuckDB lock, then retry.
+2026-10-29 12:26:16 - ingestion.pipeline - ERROR - stage:68 - Stage prices:STLA failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 63, in stage
+    result = action()
+             ^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 123, in <lambda>
+    stage(f"prices:{ticker}", lambda ticker=ticker, start=start: ingest_price_history(
+                                                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\tests\unit\test_pipeline.py", line 66, in action
+    raise RuntimeError("provider unavailable")
+RuntimeError: provider unavailable
+2026-10-29 12:27:43 - ingestion.pipeline - ERROR - run_pipeline:163 - Pipeline failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 123, in run_pipeline
+    stage(f"prices:{ticker}", lambda ticker=ticker, start=start: ingest_price_history(
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 60, in stage
+    _write_report(report, report_path)
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 24, in _write_report
+    temporary.replace(path)
+  File "C:\Users\T0412ZL\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\pathlib.py", line 1188, in replace
+    os.replace(self, target)
+PermissionError: [WinError 5] Access is denied: 'data\\reports\\.pipeline-latest.json.5fe24262715147258466b0dab8c9df19.tmp' -> 'data\\reports\\pipeline-latest.json'
+2026-10-29 12:27:43 - api.maintenance - ERROR - send_failure_alert:37 - Maintenance alert: {'job_id': 'a61673ccb9674ce69780bc5a81f298ba', 'kind': 'refresh', 'status': 'failed', 'timestamp': '2026-10-29T06:57:43.874393+00:00'}
+2026-10-29 12:35:20 - ingestion.pipeline - ERROR - stage:67 - Stage search-index failed
+Traceback (most recent call last):
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 62, in stage
+    result = action()
+             ^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ingestion\pipeline.py", line 153, in <lambda>
+    stage("search-index", lambda: build_vector_store(db_path=warehouse))
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ai\vector_store.py", line 354, in build_vector_store
+    documents = collect_all_documents(db_path=db_path)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ai\vector_store.py", line 271, in collect_all_documents
+    + collect_relationship_documents(db_path=db_path)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\STLA_StockTreeProject\stellantis-market-intelligence\ai\vector_store.py", line 101, in collect_relationship_documents
+    text = " ".join(
+           ^^^^^^^^^
+TypeError: sequence item 2: expected str instance, float found
+2026-10-29 12:35:21 - api.maintenance - ERROR - send_failure_alert:35 - Maintenance alert: {'job_id': 'de9f2325467e4fe4974734d0eee62974', 'kind': 'refresh', 'status': 'degraded', 'timestamp': '2026-10-29T07:05:21.155946+00:00'}

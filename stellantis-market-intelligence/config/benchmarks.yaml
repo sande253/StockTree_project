@@ -1,0 +1,10 @@
+# Market / sector benchmarks used from Phase 7 (Market vs Sector vs STLA) onward.
+# Tickers must be ingestible via the same yfinance pipeline as company-universe tickers
+# (ingestion.market_data.ingest_price_history) and feature-computed (analytics.features).
+benchmarks:
+  - key: market
+    ticker: "^GSPC"
+    label: "Broad Market (S&P 500)"
+  - key: sector
+    ticker: "CARZ"
+    label: "Global Automotive Sector (CARZ ETF)"

@@ -1,0 +1,109 @@
+# Event-detection thresholds (Phase 4 - STLA Event Detection).
+# A day is flagged as an event if ANY of the four rules below trigger.
+# `detection_method` on the resulting event records which rule(s) fired.
+thresholds:
+  # Rule 1: absolute daily return (e.g. 0.05 = 5%)
+  absolute_return: 0.05
+  # Rule 2: |z-score of price| over the rolling window (Phase 3 `zscore`)
+  zscore: 2.0
+  # Rule 3: |daily_return| / rolling_volatility (volatility-adjusted movement)
+  volatility_adjusted: 2.0
+  # Rule 4: |volume z-score| over the rolling window (abnormal volume)
+  volume_zscore: 2.0
+  # Severity buckets, keyed on |daily_return|
+  severity:
+    high: 0.07
+    medium: 0.04
+    low: 0.02
+
+# Rule-based event classification (Phase 9 - Event Classification).
+# Lowercase keyword substrings matched against news title+summary text. The category
+# with the most keyword hits wins; ties go to the earlier category below. No match -> "Other".
+classification_keywords:
+  Earnings:
+    - earnings
+    - quarterly results
+    - full-year results
+    - revenue
+    - net profit
+    - guidance
+  Production:
+    - production cut
+    - output reduction
+    - production halt
+    - ramp-up
+    - plant shutdown
+  Factory:
+    - factory
+    - plant
+    - assembly line
+    - manufacturing facility
+  Supply Chain:
+    - supply chain
+    - semiconductor shortage
+    - chip shortage
+    - component shortage
+    - logistics disruption
+  Partnership:
+    - partnership
+    - joint venture
+    - strategic alliance
+    - collaboration
+  Acquisition:
+    - acquisition
+    - acquire
+    - merger
+    - divest
+    - stake purchase
+  Recall:
+    - recall
+    - safety defect
+    - faulty
+  Regulation:
+    - regulation
+    - regulatory
+    - emissions rule
+    - tariff
+    - antitrust
+  EV Strategy:
+    - electric vehicle strategy
+    - ev strategy
+    - electrification plan
+    - ev lineup
+  Battery:
+    - battery
+    - gigafactory
+    - battery cell
+    - battery supply
+  Technology:
+    - software platform
+    - autonomous driving
+    - adas
+    - technology partnership
+  Management:
+    - ceo
+    - chief executive
+    - resign
+    - appoint
+    - board of directors
+  Labor:
+    - strike
+    - union
+    - labor dispute
+    - layoff
+    - workforce reduction
+  Geopolitical:
+    - sanctions
+    - trade war
+    - export ban
+    - geopolitical
+  Macro:
+    - interest rate
+    - inflation
+    - recession
+    - gdp
+  Product Launch:
+    - unveils
+    - launch
+    - new model
+    - debut
